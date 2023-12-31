@@ -19,9 +19,9 @@ public class User implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
-    private String nameUser;
+    private String userName;
     private String email;
-    private String telefone;
+    private String phone;
     private String password;
     private String zipCode;
     private String address;
@@ -69,11 +69,11 @@ public class User implements Serializable, UserDetails {
     }
 
     //CONSTRUCTOR
-    public User(Long idUser, String nameUser, String email, String telefone, String password, String zipCode, String address, String streetNumber, String complement, String neighborhood, String city, String state, String cpf) {
-        this.idUser = idUser;
-        this.nameUser = nameUser;
+    public User(String userName, String email, String phone, String password, String zipCode, String address, String streetNumber, String complement, String neighborhood, String city, String state, String cpf, UserRole role) {
+
+        this.userName = userName;
         this.email = email;
-        this.telefone = telefone;
+        this.phone = phone;
         this.password = password;
         this.zipCode = zipCode;
         this.address = address;
@@ -83,14 +83,9 @@ public class User implements Serializable, UserDetails {
         this.city = city;
         this.state = state;
         this.cpf = cpf;
-    }
-
-    public User(String email, String password, UserRole role)
-    {
-        this.email = email;
-        this.password = password;
         this.role = role;
     }
+
 
     public User() {
     }
@@ -105,12 +100,12 @@ public class User implements Serializable, UserDetails {
         this.idUser = idUser;
     }
 
-    public String getNameUser() {
-        return nameUser;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -121,12 +116,12 @@ public class User implements Serializable, UserDetails {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
