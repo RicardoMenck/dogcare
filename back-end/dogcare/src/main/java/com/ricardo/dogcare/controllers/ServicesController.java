@@ -41,7 +41,7 @@ public class ServicesController {
     }
 
     //PUT
-    @PutMapping
+    @PutMapping(value = "/{idServices}")
     public ResponseEntity<Services> updateServices(@PathVariable(value = "idServices") Long idServices, @RequestBody Services service) {
         service = serviceService.updateService(idServices, service);
         return ResponseEntity.ok().body(service);
@@ -49,7 +49,7 @@ public class ServicesController {
 
     //DELETE
     @DeleteMapping(value = "/{idServices}")
-    public ResponseEntity<Services> deleteService(@PathVariable(value = "idServices") Long idServices) {
+    public ResponseEntity<Void> deleteService(@PathVariable(value = "idServices") Long idServices) {
         serviceService.deleteService(idServices);
         return ResponseEntity.noContent().build();
     }

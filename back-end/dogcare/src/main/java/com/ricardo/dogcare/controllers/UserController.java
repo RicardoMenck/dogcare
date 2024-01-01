@@ -13,10 +13,14 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    //Injeção
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+
+
     //GET
     @GetMapping
     public ResponseEntity<List<User>> listUsers() {
@@ -34,13 +38,13 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         var userO = userService.saveUser(user);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idUser").buildAndExpand(user.getIdUser()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{idUser}").buildAndExpand(user.getIdUser()).toUri();
         return ResponseEntity.created(uri).body(userO);
     }
 
     //PUT
     //Verificar possível erro *2ºuser
-    @PutMapping
+    @PutMapping(value = "/{idUser}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "idUser") Long idUser, @RequestBody User user) {
         user = userService.updateUser(idUser, user);
         return ResponseEntity.ok().body(user);
@@ -48,7 +52,7 @@ public class UserController {
 
     //DELETE
     @DeleteMapping(value = "/{idUser}")
-    public ResponseEntity<User> deleteUser(@PathVariable(value = "idUser") Long idUser) {
+    public ResponseEntity<Void> deleteUser(@PathVariable(value = "idUser") Long idUser) {
         userService.deleteUser(idUser);
         return ResponseEntity.noContent().build();
     }

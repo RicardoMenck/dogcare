@@ -41,7 +41,7 @@ public class DogController {
     }
 
     //PUT
-    @PutMapping
+    @PutMapping(value = "/{idDog}")
     public ResponseEntity<Dog> updateDog(@PathVariable(value = "idDog") Long idDog, @RequestBody Dog dog) {
         dog = dogService.updateDog(idDog, dog);
         return ResponseEntity.ok().body(dog);
@@ -49,7 +49,7 @@ public class DogController {
 
     //DELETE
     @DeleteMapping(value = "/{idDog}")
-    public ResponseEntity<Dog> deleteDog(@PathVariable(value = "idDog") Long idDog) {
+    public ResponseEntity<Void> deleteDog(@PathVariable(value = "idDog") Long idDog) {
         dogService.deleteDog(idDog);
         return ResponseEntity.noContent().build();
     }
