@@ -1,2 +1,6 @@
-package com.ricardo.dogcare.entities.enums;public enum DogS {
+package com.ricardo.dogcare.entities.enums;
+
+public enum DogS {
+    MACHO,
+    FÊMEA
 }

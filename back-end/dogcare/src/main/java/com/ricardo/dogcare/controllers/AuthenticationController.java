@@ -1,8 +1,8 @@
 package com.ricardo.dogcare.controllers;
 
-import com.ricardo.dogcare.entities.AuthenticationDTO;
-import com.ricardo.dogcare.entities.LoginResponseDTO;
-import com.ricardo.dogcare.entities.RegisterDTO;
+import com.ricardo.dogcare.dto.AuthenticationDTO;
+import com.ricardo.dogcare.dto.LoginResponseDTO;
+import com.ricardo.dogcare.dto.RegisterDTO;
 import com.ricardo.dogcare.entities.User;
 import com.ricardo.dogcare.infra.security.TokenService;
 import com.ricardo.dogcare.repositories.UserRepository;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("auth")
+//@RequestMapping("auth")
 public class AuthenticationController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.ricardo.dogcare.entities;
+package com.ricardo.dogcare.dto;
 
 public record AuthenticationDTO(String email, String password) {
 }

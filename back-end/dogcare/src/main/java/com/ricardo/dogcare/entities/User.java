@@ -1,5 +1,6 @@
 package com.ricardo.dogcare.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ricardo.dogcare.entities.enums.UserRole;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +35,14 @@ public class User implements Serializable, UserDetails {
     private String cpf;
     private UserRole role;
 
+    //ASSOCIATIONS AND GET
+    @JsonIgnore
+    @OneToMany(mappedBy = "client") //Nome do atributo que está na classe de associação
+    private List<Order> orders = new ArrayList<>();
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 
     //USERDETAILS METHODS
 
@@ -70,7 +80,6 @@ public class User implements Serializable, UserDetails {
 
     //CONSTRUCTOR
     public User(String userName, String email, String phone, String password, String zipCode, String address, String streetNumber, String complement, String neighborhood, String city, String state, String cpf, UserRole role) {
-
         this.userName = userName;
         this.email = email;
         this.phone = phone;

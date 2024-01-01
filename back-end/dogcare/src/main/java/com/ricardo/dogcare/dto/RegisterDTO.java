@@ -1,4 +1,4 @@
-package com.ricardo.dogcare.entities;
+package com.ricardo.dogcare.dto;
 
 import com.ricardo.dogcare.entities.enums.UserRole;
 

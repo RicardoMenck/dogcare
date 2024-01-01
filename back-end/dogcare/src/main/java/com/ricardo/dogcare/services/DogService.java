@@ -1,13 +1,14 @@
 package com.ricardo.dogcare.services;
 
 import com.ricardo.dogcare.entities.Dog;
-
 import com.ricardo.dogcare.repositories.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DogService {
 
     @Autowired
@@ -36,4 +37,4 @@ public class DogService {
     //DELETE
     public void deleteDog(Long idDog) { dogRepository.deleteById(idDog);}
 }
-}
+
