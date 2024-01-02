@@ -5,9 +5,14 @@ import com.ricardo.dogcare.repositories.UserRepository;
 import com.ricardo.dogcare.services.exceptions.DatabaseException;
 import com.ricardo.dogcare.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +24,13 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+
+    private final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     //GET
     public User findById(Long idUser) {
+        logger.info("Finding one person by id! Id searched: " + idUser);
+        logger.info("Usuário: " + getLogado() + "est[a verificando o usuário: " + idUser);
         Optional<User> userO = userRepository.findById(idUser);
         return  userO.orElseThrow(() -> new ResourceNotFoundException(idUser));
     }
@@ -66,5 +76,14 @@ public class UserService {
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+
+    private String getLogado(){
+        Authentication userLogado = SecurityContextHolder.getContext().getAuthentication();
+        if(!(userLogado instanceof AnonymousAuthenticationToken)) {
+            return userLogado.getName();
+        }
+        return "Null";
     }
 }

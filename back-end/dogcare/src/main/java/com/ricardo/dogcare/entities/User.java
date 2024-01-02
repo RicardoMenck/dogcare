@@ -22,6 +22,7 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
     private String userName;
+    @Column(unique = true)
     private String email;
     private String phone;
     private String password;
@@ -32,6 +33,7 @@ public class User implements Serializable, UserDetails {
     private String neighborhood;
     private String city;
     private String state;
+    @Column(unique = true )
     private String cpf;
     private UserRole role;
 
@@ -43,6 +45,13 @@ public class User implements Serializable, UserDetails {
     public List<Order> getOrders() {
         return orders;
     }
+
+    //ASSOCIATION WITH DOG
+    @OneToMany(mappedBy = "owner")
+    private List<Dog> dogs = new ArrayList<>();
+
+    public List<Dog> getDogs() {return dogs;}
+
 
     //USERDETAILS METHODS
 

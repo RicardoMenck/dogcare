@@ -24,6 +24,10 @@ public class Dog implements Serializable {
     private double peso;
 
     //ASSOCIATIONS
+    @ManyToOne
+    @JoinColumn(name = "owner_id") //Nome para a chave estrangeira
+    private User owner;
+
 
     //CONSTRUCTOR
     public Dog(String dogName, String breed, String color, DogS sexo, boolean neutered, double peso) {
