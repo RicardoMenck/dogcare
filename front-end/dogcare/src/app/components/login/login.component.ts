@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
-import { delay, take } from 'rxjs';
+import { take } from 'rxjs';
 import { LoginModel } from './login.model';
 import { Router } from '@angular/router';
 

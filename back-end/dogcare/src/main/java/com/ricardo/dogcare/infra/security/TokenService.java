@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.ricardo.dogcare.entities.User;
+import com.ricardo.dogcare.entities.enums.UserRole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ import java.time.ZoneOffset;
 
 @Service
 public class TokenService {
+
+    private static final String ISSUER = "API DOCARE";
+
     @Value("${api.security.token.secret}")
     private String secret;
     public String generateToke(User user) {
@@ -21,6 +25,8 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(user.getEmail())
+                    .withClaim("name", user.getUserName())
+                    .withClaim("admin", UserRole.ADMIN.ordinal())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
@@ -33,7 +39,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();

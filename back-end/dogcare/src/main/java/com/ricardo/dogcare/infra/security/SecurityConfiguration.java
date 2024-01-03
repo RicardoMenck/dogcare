@@ -1,10 +1,12 @@
 package com.ricardo.dogcare.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 // SS =  Spring Security
 //Classe de configuração, em que vamos desabilitar as configurações padrão do Spring Security(SS) e personalizar as configurações.
 
@@ -20,8 +26,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    @Value("$app.connect.url")
+    private String connection ;
+
     @Autowired
-    SecurityFilter securityFilter;
+    private SecurityFilter securityFilter;
 
     //Corrente de filtro de segurança, a corrente de filtro que vamos aplicar em uma requisição para a segurança de minha aplicação. Os filtros são métodos para realizar validações dos usuário que estão chamando requisições da aplicação, ao executar os filtros retorna uma permissão ou bloqueio da requisição do usuário.
 
@@ -35,8 +44,11 @@ public class SecurityConfiguration {
         * */
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/admin**").hasRole("ADMIN")
+                        .requestMatchers("/login", "/login/**").permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers(HttpMethod.PUT).permitAll()
@@ -47,6 +59,20 @@ public class SecurityConfiguration {
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+/*    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        var corsConfig = new CorsConfiguration();
+        corsConfig.addAllowedOrigin("http://localhost:4200");
+        corsConfig.addAllowedMethod("*");
+        corsConfig.addAllowedHeader("*");
+
+        var url = new UrlBasedCorsConfigurationSource();
+        url.registerCorsConfiguration("/**", corsConfig);
+
+        return url;
+
+    }*/
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
