@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DogModel } from './dog.model';
+import { DogModel } from '../../models/dog.model';
 import { DogService } from './dog.service';
 import { NgForm } from '@angular/forms';
 

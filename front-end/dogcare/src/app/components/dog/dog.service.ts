@@ -7,7 +7,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { DogModel } from './dog.model';
+import { DogModel } from '../../models/dog.model';
 
 @Injectable({
   providedIn: 'root',

@@ -21,9 +21,8 @@ import { DogComponent } from './components/dog/dog.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PhotosComponent } from './components/photos/photos.component';
-import { ServiceComponent } from './components/service/service.component';
-import { ServicesComponent } from './components/services/services.component';
 import { UserComponent } from './components/user/user.component';
+import { ServicosComponent } from './components/servicos/servicos.component';
 
 @NgModule({
   declarations: [
@@ -32,10 +31,9 @@ import { UserComponent } from './components/user/user.component';
     HomeComponent,
     AboutComponent,
     PhotosComponent,
-    ServicesComponent,
     UserComponent,
     DogComponent,
-    ServiceComponent,
+    ServicosComponent,
   ],
   imports: [
     CommonModule,
