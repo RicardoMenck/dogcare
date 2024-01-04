@@ -12,6 +12,8 @@ export class DogComponent implements OnInit {
   dog = {} as DogModel;
   dogs: DogModel[] = [];
 
+  formulario!: NgForm;
+
   constructor(private dogService: DogService) {}
 
   ngOnInit(): void {

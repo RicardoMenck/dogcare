@@ -9,7 +9,7 @@ import { tokenGetter } from './app.module';
 export class AppComponent {
   title = 'dogcare';
 
-  Logged() {
+  logged() {
     const tokenJWT = tokenGetter();
     return tokenJWT != null;
   }

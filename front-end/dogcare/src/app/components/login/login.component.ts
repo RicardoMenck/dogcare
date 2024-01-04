@@ -2,7 +2,7 @@ import { LoginService } from './login.service';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { take } from 'rxjs';
-import { LoginModel } from './login.model';
+import { LoginModel } from '../../models/login.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -61,7 +61,7 @@ export class LoginComponent {
         .subscribe({
           next: (result: LoginModel) => {
             console.log(result.token);
-            this.router.navigateByUrl('/restrito');
+            this.router.navigateByUrl('/menu');
           },
           error: (error) => {
             console.log('Mensagem de erro!', error);

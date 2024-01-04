@@ -23,6 +23,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { UserComponent } from './components/user/user.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ServicosComponent } from './components/servicos/servicos.component';
     UserComponent,
     DogComponent,
     ServicosComponent,
+    MenuComponent,
+    RegistroComponent,
   ],
   imports: [
     CommonModule,
