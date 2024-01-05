@@ -1,7 +1,12 @@
+import { DogModel } from './../../models/dog.model';
 import { Component, OnInit } from '@angular/core';
-import { DogModel } from '../../models/dog.model';
 import { DogService } from './dog.service';
-import { NgForm } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-dog',
@@ -9,36 +14,61 @@ import { NgForm } from '@angular/forms';
   styleUrl: './dog.component.scss',
 })
 export class DogComponent implements OnInit {
-  dog = {} as DogModel;
+  dog: DogModel | undefined;
+  //dog = {} as DogModel;
   dogs: DogModel[] = [];
 
-  formulario!: NgForm;
+  form!: FormGroup;
 
-  constructor(private dogService: DogService) {}
+  constructor(
+    private dogService: DogService,
+    private formBuilder: FormBuilder
+  ) {
+    //primeira parte campos do formulario.
+    this.form = this.formBuilder.group({
+      //dogName: new FormControl(null,[Validators.required]))
+      id: [null],
+      dogName: [null, [Validators.required]], //com validators
+      breed: [null], //sem validators
+      color: ['preto'], //por padrão esse valor
+      sexo: [null],
+      neutered: [null],
+      peso: [null],
+    });
+  }
 
   ngOnInit(): void {
     this.dogService.listDog();
   }
 
-  addDog() {
-    this.dog.dogName = 'Rex';
-    this.dog.breed = 'Caramelo';
-    this.dog.color = 'Caramelo';
-    this.dog.sexo = 'FÊMEA';
-    this.dog.neutered = true;
-    this.dog.peso = 25.5;
-    this.dogService.saveDog(this.dog);
-  }
+  // addDog() {
+  //   this.dog.dogName = 'Rex';
+  //   this.dog.breed = 'Caramelo';
+  //   this.dog.color = 'Caramelo';
+  //   this.dog.sexo = 'FÊMEA';
+  //   this.dog.neutered = true;
+  //   this.dog.peso = 25.5;
+  //   this.dogService.saveDog(this.dog);
+  // }
 
-  saveDog(form: NgForm) {
-    if (this.dog.id !== undefined) {
-      this.dogService.updateDog(this.dog).subscribe(() => {
-        this.cleanForm(form);
-      });
-    } else {
-      this.dogService.saveDog(this.dog).subscribe(() => {
-        this.cleanForm(form);
-      });
+  saveDog() {
+    for (const key in this.form.controls) {
+      if (this.form.controls.hasOwnProperty(key)) {
+        this.form.controls[key].markAsDirty();
+        this.form.controls[key].updateValueAndValidity();
+      }
+    }
+    if (this.form.valid) {
+      const formValues: DogModel = this.form.getRawValue();
+      if (formValues.id) {
+        this.dogService.updateDog(formValues).subscribe(() => {
+          this.cleanForm();
+        });
+      } else {
+        this.dogService.saveDog(formValues).subscribe(() => {
+          this.cleanForm();
+        });
+      }
     }
   }
 
@@ -54,9 +84,9 @@ export class DogComponent implements OnInit {
     });
   }
 
-  cleanForm(form: NgForm) {
+  cleanForm() {
     this.listDog();
-    form.resetForm();
+    this.form.reset();
     this.dog = {} as DogModel;
   }
 }

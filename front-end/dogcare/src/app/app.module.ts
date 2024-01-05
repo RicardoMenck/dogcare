@@ -68,5 +68,5 @@ import { RegistroComponent } from './components/registro/registro.component';
 export class AppModule {}
 
 export function tokenGetter() {
-  return localStorage.getItem('jwt');
+  return sessionStorage.getItem('jwt');
 }

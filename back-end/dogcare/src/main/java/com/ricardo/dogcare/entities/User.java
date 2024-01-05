@@ -37,14 +37,6 @@ public class User implements Serializable, UserDetails {
     private String cpf;
     private UserRole role;
 
-    //ASSOCIATIONS AND GET
-    @JsonIgnore
-    @OneToMany(mappedBy = "client") //Nome do atributo que está na classe de associação
-    private List<Order> orders = new ArrayList<>();
-
-    public List<Order> getOrders() {
-        return orders;
-    }
 
     //ASSOCIATION WITH DOG
     @OneToMany(mappedBy = "owner")

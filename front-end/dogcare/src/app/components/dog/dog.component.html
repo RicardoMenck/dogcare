@@ -6,7 +6,7 @@
 
 <div class="container p-5">
   <!-- <form (ngSubmit)="" [formGroup]=""> -->
-  <form>
+  <form [formGroup]="form">
     <!-- dogName -->
     <div class="form-group mb-3">
       <label class="form-label" for="dogName"
@@ -16,9 +16,14 @@
         type="text"
         class="form-control"
         id="dogName"
+        formControlName="dogName"
         aria-describedby="dogName"
         placeholder="Nome do Cachorro"
       />
+      @if (form.get('dogName')?.invalid){
+      <span>erro</span>
+      <!-- validar os erros -->
+      }
     </div>
     <!-- dogName -->
 
@@ -31,6 +36,7 @@
         type="text"
         class="form-control"
         id="breed"
+        formControlName="breed"
         aria-describedby="breed"
         placeholder="Raça do Cachorro"
       />
@@ -46,6 +52,7 @@
         type="text"
         class="form-control"
         id="color"
+        formControlName="color"
         aria-describedby="color"
         placeholder="Cor do Cachorro"
       />
@@ -55,7 +62,7 @@
     <!-- sexo  Verificar-->
     <div class="form-group mb-3">
       <label for="sexo">Sexo do Cachorro</label>
-      <select class="form-select" id="sexo">
+      <select class="form-select" id="sexo" formControlName="sexo">
         <option selected>Escolher...</option>
         <option value="MACHO">MACHO</option>
         <option value="FÊMEA">FÊMEA</option>
@@ -66,10 +73,10 @@
     <!-- neutered  Verificar-->
     <div class="form-group mb-3">
       <label for="neutered">O Cachorro é Castrado?</label>
-      <select class="form-select" id="neutered">
+      <select class="form-select" id="neutered" formControlName="neutered">
         <option selected>Escolher...</option>
-        <option value="true">Sim</option>
-        <option value="false">Não</option>
+        <option [value]="true">Sim</option>
+        <option [value]="false">Não</option>
       </select>
     </div>
     <!-- neutered -->
@@ -81,12 +88,15 @@
         type="number"
         class="form-control"
         id="peso"
+        formControlName="peso"
         aria-describedby="peso"
         placeholder="Peso do Cachorro"
       />
     </div>
     <!-- peso -->
 
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button (click)="saveDog()" type="button" class="btn btn-primary">
+      Enviar
+    </button>
   </form>
 </div>

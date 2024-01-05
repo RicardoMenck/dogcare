@@ -10,13 +10,13 @@ export class TokenjwtService {
   logged?: UserModel;
 
   keepToken(token: string) {
-    localStorage.setItem(this.key, token);
+    sessionStorage.setItem(this.key, token);
     const userToken = new JwtHelperService().decodeToken(token);
     this.userLogged(userToken);
   }
 
   deleteToken() {
-    localStorage.removeItem(this.key);
+    sessionStorage.removeItem(this.key);
     this.userLogged(null);
   }
 

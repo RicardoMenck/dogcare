@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +29,12 @@ public class Dog implements Serializable {
     @ManyToOne
     @JoinColumn(name = "owner_id") //Nome para a chave estrangeira
     private User owner;
+
+    @OneToMany(mappedBy = "pet")
+    private List<Services> services =new ArrayList<>();
+
+    public List<Services> getServices() {return services;}
+
 
 
     //CONSTRUCTOR

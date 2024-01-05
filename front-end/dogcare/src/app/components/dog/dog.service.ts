@@ -18,7 +18,10 @@ export class DogService {
   constructor(private httpClient: HttpClient) {}
   //Headers
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'applicatiom/json' }),
+    headers: new HttpHeaders({
+      'Content-Type': 'applicatiom/json',
+      Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+    }),
   };
 
   listDog(): Observable<DogModel[]> {
@@ -35,7 +38,7 @@ export class DogService {
 
   saveDog(dog: DogModel): Observable<DogModel> {
     return this.httpClient
-      .post<DogModel>(this.connecet, dog)
+      .post<DogModel>(this.connecet, dog, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 

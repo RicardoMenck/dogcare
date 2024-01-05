@@ -1,4 +1,43 @@
-<div class="example-container">
+<form>
+  <div class="mb-3">
+    <label for="email" class="form-label">Digite seu email de login</label>
+    <input
+      [formControl]="email"
+      type="email"
+      class="form-control"
+      id="email"
+      aria-describedby="email"
+      placeholder="example@dogcare.com"
+      required
+    />
+    <!-- @if (email.invalid) {
+    <mat-error>{{ getErrorMessage() }}</mat-error>
+    } -->
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Senha</label>
+    <input
+      [formControl]="password"
+      type="password"
+      class="form-control"
+      id="password"
+      placeholder="Senha"
+      required
+    />
+    <!-- @if (password.invalid) {
+    <mat-error>{{ getErrorMessagePassword() }}</mat-error>
+    } -->
+  </div>
+
+  <button (click)="realizarLogin()" type="submit" class="btn btn-primary mb-3">
+    Login
+  </button>
+  @if (mensagemValidForm) {
+  <mat-error>{{ mensagemValidForm }}</mat-error>
+  }
+</form>
+
+<!-- <div class="example-container">
   <mat-form-field>
     <mat-label>Enter your email</mat-label>
     <input
@@ -38,4 +77,4 @@
   @if (mensagemValidForm) {
   <mat-error>{{ mensagemValidForm }}</mat-error>
   }
-</div>
+</div> -->

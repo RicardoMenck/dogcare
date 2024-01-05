@@ -17,6 +17,11 @@ public class Services implements Serializable {
     private String description;
     private Double price;
 
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id") //Nome para a chave estrangeira
+    private Dog pet;
+
     //Colocar o cachorro também nos service??
 
     //ASSOCIATIONS

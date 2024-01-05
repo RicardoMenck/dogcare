@@ -10,6 +10,7 @@ import { PhotosComponent } from './components/photos/photos.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { GuardRestritoService } from './guard-restrito.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
     path: 'restrito',
+    canActivate: [GuardRestritoService],
     loadChildren: () =>
       import('./restrito/restrito.module').then((mod) => mod.RestritoModule),
   },
