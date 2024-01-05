@@ -1,3 +1,4 @@
+import { TokenjwtService } from './tokenjwt.service';
 import { LoginService } from './login.service';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -18,7 +19,12 @@ export class LoginComponent {
     Validators.minLength(6),
   ]);
   hide = true;
-  constructor(private loginService: LoginService, private router: Router) {}
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private tokenjwt: TokenjwtService
+  ) {}
 
   mensagemValidForm = '';
 
@@ -61,6 +67,7 @@ export class LoginComponent {
         .subscribe({
           next: (result: LoginModel) => {
             console.log(result.token);
+            this.tokenjwt.keepToken(result.token);
             this.router.navigateByUrl('/menu');
           },
           error: (error) => {

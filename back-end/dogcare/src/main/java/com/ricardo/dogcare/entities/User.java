@@ -215,8 +215,13 @@ public class User implements Serializable, UserDetails {
         this.cpf = cpf;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
 
-
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     //HASH AND EQUALS
 
