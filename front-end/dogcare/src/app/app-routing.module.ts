@@ -10,6 +10,7 @@ import { PhotosComponent } from './components/photos/photos.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { autorizadoGuard } from './_guard/autorizado.guard';
+import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,6 +21,11 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
 
   { path: 'dog', component: DogComponent, canActivate: [autorizadoGuard] },
+  {
+    path: 'dogs',
+    component: DogDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
 
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' },

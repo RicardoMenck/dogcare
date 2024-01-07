@@ -18,8 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
+        <tr *ngFor="let dog of dogs">
+          <td>{{ dog.idDog }}</td>
+          <td>{{ dog.dogName }}</td>
+          <td>{{ dog.breed }}</td>
+          <td>{{ dog.color }}</td>
+          <td>{{ dog.sexo }}</td>
+          <td>{{ dog.neutered }}</td>
+          <td>{{ dog.peso }}</td>
           <td></td>
           <td>
             <span class="float-right">

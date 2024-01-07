@@ -60,7 +60,7 @@ export class DogComponent implements OnInit {
     }
     if (this.dogFormCreate.valid) {
       const formValues: DogModel = this.dogFormCreate.getRawValue();
-      if (formValues.id) {
+      if (formValues.idDog) {
         this.dogService.updateDog(formValues).subscribe(() => {
           this.cleanForm();
         });

@@ -1,5 +1,5 @@
 export interface DogModel {
-  id?: number;
+  idDog?: number;
   dogName: string;
   breed: string;
   color: string;

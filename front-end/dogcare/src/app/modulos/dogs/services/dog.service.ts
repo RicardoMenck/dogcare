@@ -13,7 +13,7 @@ import { DogModel } from '../models/dog.model';
   providedIn: 'root',
 })
 export class DogService {
-  private readonly connecet = `${environment.api}/dog`;
+  private readonly connect = `${environment.api}/dog`;
 
   constructor(private httpClient: HttpClient) {}
   //Headers
@@ -26,31 +26,31 @@ export class DogService {
 
   listDog(): Observable<DogModel[]> {
     return this.httpClient
-      .get<DogModel[]>(this.connecet)
+      .get<DogModel[]>(this.connect)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   findByID(id: number): Observable<DogModel> {
     return this.httpClient
-      .get<DogModel>(`${this.connecet}/${id}`)
+      .get<DogModel>(`${this.connect}/${id}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   saveDog(dog: DogModel): Observable<DogModel> {
     return this.httpClient
-      .post<DogModel>(this.connecet, dog, this.httpOptions)
+      .post<DogModel>(this.connect, dog, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   updateDog(dog: DogModel): Observable<DogModel> {
     return this.httpClient
-      .put<DogModel>(`${this.connecet}/${dog.id}`, dog)
+      .put<DogModel>(`${this.connect}/${dog.idDog}`, dog)
       .pipe(retry(1), catchError(this.handleError));
   }
 
   deleteDog(id: number): Observable<DogModel> {
     return this.httpClient
-      .delete<DogModel>(`${this.connecet}/${id}`)
+      .delete<DogModel>(`${this.connect}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 

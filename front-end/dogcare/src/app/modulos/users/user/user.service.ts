@@ -8,27 +8,30 @@ import { UserModel } from './user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly connecet = `${environment.api}/user`;
+  private readonly connect = `${environment.api}/user`;
 
   constructor(private httpClient: HttpClient) {}
 
   listUser(): Observable<UserModel[]> {
-    return this.httpClient.get<UserModel[]>(this.connecet);
+    return this.httpClient.get<UserModel[]>(this.connect);
   }
 
   findByID(id: number): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(`${this.connecet}/${id}`);
+    return this.httpClient.get<UserModel>(`${this.connect}/${id}`);
   }
 
   saveUser(user: UserModel): Observable<UserModel> {
-    return this.httpClient.post<UserModel>(this.connecet, user);
+    return this.httpClient.post<UserModel>(this.connect, user);
   }
 
   updateUser(user: UserModel): Observable<UserModel> {
-    return this.httpClient.put<UserModel>(`${this.connecet}/${user.id}`, user);
+    return this.httpClient.put<UserModel>(
+      `${this.connect}/${user.idUser}`,
+      user
+    );
   }
 
   deleteUser(id: number): Observable<UserModel> {
-    return this.httpClient.delete<UserModel>(`${this.connecet}/${id}`);
+    return this.httpClient.delete<UserModel>(`${this.connect}/${id}`);
   }
 }
