@@ -2,6 +2,8 @@ package com.ricardo.dogcare.services;
 
 import com.ricardo.dogcare.entities.Dog;
 import com.ricardo.dogcare.repositories.DogRepository;
+import com.ricardo.dogcare.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,22 @@ public class DogService {
 
     //PUT
     public Dog updateDog(Long idDog, Dog dog) {
-        Dog entity = dogRepository.getReferenceById(idDog);
-        return dogRepository.save(entity);
+        try {
+            Dog entity = dogRepository.getReferenceById(idDog);
+            udpateData(entity, dog);
+            return dogRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(idDog);
+        }
+    }
+
+    private void udpateData(Dog entity, Dog dog) {
+        entity.setDogName(dog.getDogName());
+        entity.setBreed(dog.getBreed());
+        entity.setColor(dog.getColor());
+        entity.setSexo(dog.getSexo());
+        entity.setNeutered(dog.isNeutered());
+        entity.setPeso(dog.getPeso());
     }
 
 

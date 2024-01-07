@@ -1,5 +1,5 @@
 export interface UserModel {
-  id?: number;
+  idUser?: number;
   userName: string;
   email: string;
   phone: string;
@@ -12,5 +12,5 @@ export interface UserModel {
   city: string;
   state: string;
   cpf: string;
-  userRole: string;
+  role: string;
 }

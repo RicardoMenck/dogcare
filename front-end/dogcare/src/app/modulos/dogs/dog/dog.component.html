@@ -6,21 +6,19 @@
 
 <div class="container p-5">
   <!-- <form (ngSubmit)="" [formGroup]=""> -->
-  <form [formGroup]="form">
+  <form (ngSubmit)="saveDog()" [formGroup]="dogFormCreate">
     <!-- dogName -->
     <div class="form-group mb-3">
-      <label class="form-label" for="dogName"
-        >Digite o nome do seu Cachorro</label
-      >
+      <label class="form-label" for="dogName">Nome do Cachorro </label>
       <input
         type="text"
         class="form-control"
         id="dogName"
         formControlName="dogName"
         aria-describedby="dogName"
-        placeholder="Nome do Cachorro"
+        placeholder="Digite o nome do seu Cachorro"
       />
-      @if (form.get('dogName')?.invalid){
+      @if (dogFormCreate.get('dogName')?.invalid){
       <span>erro</span>
       <!-- validar os erros -->
       }
@@ -29,41 +27,37 @@
 
     <!-- breed -->
     <div class="form-group mb-3">
-      <label class="form-label" for="breed"
-        >Digite a raça do seu Cachorro</label
-      >
+      <label class="form-label" for="breed">Raça do Cachorro</label>
       <input
         type="text"
         class="form-control"
         id="breed"
         formControlName="breed"
         aria-describedby="breed"
-        placeholder="Raça do Cachorro"
+        placeholder="Digite a raça do seu Cachorro"
+        required
       />
     </div>
     <!-- breed -->
 
     <!-- color -->
     <div class="form-group mb-3">
-      <label class="form-label" for="color"
-        >Digite a(s) cor(es) do seu Cachorro</label
-      >
+      <label class="form-label" for="color">Cor do Cachorro</label>
       <input
         type="text"
         class="form-control"
         id="color"
         formControlName="color"
         aria-describedby="color"
-        placeholder="Cor do Cachorro"
+        placeholder="Digite a(s) cor(es) do seu Cachorro"
       />
     </div>
     <!-- color -->
 
     <!-- sexo  Verificar-->
     <div class="form-group mb-3">
-      <label for="sexo">Sexo do Cachorro</label>
+      <label for="sexo">Qual o sexo do Cachorro?</label>
       <select class="form-select" id="sexo" formControlName="sexo">
-        <option selected>Escolher...</option>
         <option value="MACHO">MACHO</option>
         <option value="FÊMEA">FÊMEA</option>
       </select>
@@ -73,8 +67,12 @@
     <!-- neutered  Verificar-->
     <div class="form-group mb-3">
       <label for="neutered">O Cachorro é Castrado?</label>
-      <select class="form-select" id="neutered" formControlName="neutered">
-        <option selected>Escolher...</option>
+      <select
+        class="form-select"
+        id="neutered"
+        formControlName="neutered"
+        required
+      >
         <option [value]="true">Sim</option>
         <option [value]="false">Não</option>
       </select>
@@ -83,20 +81,18 @@
 
     <!-- peso -->
     <div class="form-group mb-3">
-      <label class="form-label" for="peso">Digite o peso do seu Cachorro</label>
+      <label class="form-label" for="peso" required>Peso do Cachorro </label>
       <input
         type="number"
         class="form-control"
         id="peso"
         formControlName="peso"
         aria-describedby="peso"
-        placeholder="Peso do Cachorro"
+        placeholder="Digite o peso do seu Cachorro"
       />
     </div>
     <!-- peso -->
 
-    <button (click)="saveDog()" type="button" class="btn btn-primary">
-      Enviar
-    </button>
+    <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>

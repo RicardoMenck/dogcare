@@ -1,6 +1,8 @@
 <form>
   <div class="mb-3">
-    <label for="email" class="form-label">Digite seu email de login</label>
+    <label for="email" class="form-label" required
+      >Digite seu email de login</label
+    >
     <input
       [formControl]="email"
       type="email"
@@ -10,6 +12,11 @@
       placeholder="example@dogcare.com"
       required
     />
+    @if (email.invalid) {
+    <div>
+      <p>{{ getErrorMessage() }}</p>
+    </div>
+    }
     <!-- @if (email.invalid) {
     <mat-error>{{ getErrorMessage() }}</mat-error>
     } -->
@@ -33,7 +40,9 @@
     Login
   </button>
   @if (mensagemValidForm) {
-  <mat-error>{{ mensagemValidForm }}</mat-error>
+  <div>
+    <p>{{ mensagemValidForm }}</p>
+  </div>
   }
 </form>
 

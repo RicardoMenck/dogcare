@@ -5,12 +5,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RestritoModule } from './restrito/restrito.module';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { DogComponent } from './components/dog/dog.component';
+import { DogComponent } from './modulos/dogs/dog/dog.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { RegistroComponent } from './components/registro/registro.component';
-import { GuardRestritoService } from './guard-restrito.service';
+import { autorizadoGuard } from './_guard/autorizado.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,15 +19,19 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
 
-  { path: 'menu', component: MenuComponent },
-  { path: 'dog', component: DogComponent },
+  { path: 'dog', component: DogComponent, canActivate: [autorizadoGuard] },
 
   { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '**', redirectTo: 'home' },
   {
     path: 'restrito',
-    canActivate: [GuardRestritoService],
     loadChildren: () =>
       import('./restrito/restrito.module').then((mod) => mod.RestritoModule),
+  },
+  {
+    path: 'dog',
+    loadChildren: () =>
+      import('./modulos/dogs/dogs.module').then((mod) => mod.DogsModule),
   },
 ];
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginModel } from '../../models/login.model';
+import { LoginModel } from './login.model';
 import { environment } from '../../../environments/environment';
 
 //dessa forma o serviço fica local

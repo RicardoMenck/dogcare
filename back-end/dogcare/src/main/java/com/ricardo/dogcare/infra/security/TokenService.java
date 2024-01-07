@@ -15,7 +15,7 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
-    private static final String ISSUER = "API DOCARE";
+    private static final String ISSUER = "API DOG CARE";
 
     @Value("${api.security.token.secret}")
     private String secret;
@@ -23,7 +23,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .withSubject(user.getEmail())
                     .withClaim("name", user.getUserName())
                     .withClaim("admin", UserRole.ADMIN.ordinal())

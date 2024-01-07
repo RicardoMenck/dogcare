@@ -1,6 +1,6 @@
-import { DogModel } from './../../models/dog.model';
+import { DogModel } from '../models/dog.model';
 import { Component, OnInit } from '@angular/core';
-import { DogService } from './dog.service';
+import { DogService } from '../services/dog.service';
 import {
   FormBuilder,
   FormControl,
@@ -18,14 +18,14 @@ export class DogComponent implements OnInit {
   //dog = {} as DogModel;
   dogs: DogModel[] = [];
 
-  form!: FormGroup;
+  dogFormCreate!: FormGroup;
 
   constructor(
     private dogService: DogService,
     private formBuilder: FormBuilder
   ) {
     //primeira parte campos do formulario.
-    this.form = this.formBuilder.group({
+    this.dogFormCreate = this.formBuilder.group({
       //dogName: new FormControl(null,[Validators.required]))
       id: [null],
       dogName: [null, [Validators.required]], //com validators
@@ -52,14 +52,14 @@ export class DogComponent implements OnInit {
   // }
 
   saveDog() {
-    for (const key in this.form.controls) {
-      if (this.form.controls.hasOwnProperty(key)) {
-        this.form.controls[key].markAsDirty();
-        this.form.controls[key].updateValueAndValidity();
+    for (const key in this.dogFormCreate.controls) {
+      if (this.dogFormCreate.controls.hasOwnProperty(key)) {
+        this.dogFormCreate.controls[key].markAsDirty();
+        this.dogFormCreate.controls[key].updateValueAndValidity();
       }
     }
-    if (this.form.valid) {
-      const formValues: DogModel = this.form.getRawValue();
+    if (this.dogFormCreate.valid) {
+      const formValues: DogModel = this.dogFormCreate.getRawValue();
       if (formValues.id) {
         this.dogService.updateDog(formValues).subscribe(() => {
           this.cleanForm();
@@ -86,7 +86,7 @@ export class DogComponent implements OnInit {
 
   cleanForm() {
     this.listDog();
-    this.form.reset();
+    this.dogFormCreate.reset();
     this.dog = {} as DogModel;
   }
 }

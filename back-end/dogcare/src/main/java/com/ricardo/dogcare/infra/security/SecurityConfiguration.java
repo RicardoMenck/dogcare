@@ -47,9 +47,9 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/home","/about","/servicos","/photos","/login","/register", "/dog").permitAll()
-                        .requestMatchers("/admin**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+//                        .requestMatchers("/home","/about","/servicos","/photos","/login","/register", "/dog").permitAll()
+//                        .requestMatchers("/admin**","/user").hasRole("ADMIN")
+                        .anyRequest().permitAll()
 
 //                        .requestMatchers(HttpMethod.GET).permitAll()
 //                        .requestMatchers(HttpMethod.POST).permitAll()

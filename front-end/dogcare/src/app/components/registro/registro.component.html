@@ -6,7 +6,7 @@
 
 <div class="container p-5">
   <!-- <form (ngSubmit)="" [formGroup]=""> -->
-  <form>
+  <form (ngSubmit)="registerUser()" [formGroup]="userFormRegister">
     <!-- NOME -->
     <div class="form-group mb-3">
       <label class="form-label" for="userName">Digite seu nome</label>
@@ -14,6 +14,7 @@
         type="text"
         class="form-control"
         id="userName"
+        formControlName="userName"
         aria-describedby="userName"
         placeholder="Seu nome"
       />
@@ -27,6 +28,7 @@
         type="email"
         class="form-control"
         id="email"
+        formControlName="email"
         aria-describedby="email"
         placeholder="Seu email"
       />
@@ -40,6 +42,7 @@
         type="tel"
         class="form-control"
         id="phone"
+        formControlName="phone"
         aria-describedby="phone"
         placeholder="Seu telefone"
       />
@@ -55,6 +58,7 @@
         type="password"
         class="form-control"
         id="password"
+        formControlName="password"
         placeholder="Senha"
       />
     </div>
@@ -63,7 +67,12 @@
     <!-- CEP -->
     <div class="form-group mb-3">
       <label for="zipCode">CEP</label>
-      <input type="text" class="form-control" id="zipCode" />
+      <input
+        type="text"
+        class="form-control"
+        id="zipCode"
+        formControlName="zipCode"
+      />
     </div>
     <!-- CEP -->
 
@@ -74,6 +83,7 @@
         type="text"
         class="form-control"
         id="address"
+        formControlName="address"
         placeholder="Rua das palmeiras"
       />
     </div>
@@ -83,9 +93,10 @@
     <div class="form-group mb-3">
       <label for="streetNumber">Número</label>
       <input
-        type="number"
+        type="text"
         class="form-control"
         id="streetNumber"
+        formControlName="streetNumber"
         placeholder="55"
       />
     </div>
@@ -98,6 +109,7 @@
         type="text"
         class="form-control"
         id="complement"
+        formControlName="complement"
         aria-describedby="complement"
         placeholder="Bloco, apto, andar"
       />
@@ -111,8 +123,8 @@
         type="text"
         class="form-control"
         id="neighborhood"
+        formControlName="neighborhood"
         aria-describedby="neighborhood"
-        placeholder="Bairro"
       />
     </div>
     <!-- BAIRRO -->
@@ -121,26 +133,40 @@
 
     <div class="form-group col-md-6 mb-3">
       <label for="city">Cidade</label>
-      <input type="text" class="form-control" id="city" />
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        formControlName="city"
+      />
     </div>
     <!-- CIDADE -->
 
     <!-- ESTADO -->
     <div class="form-group col-md-4 mb-3">
       <label for="state">Estado</label>
-      <input type="text" class="form-control" id="state" />
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        formControlName="state"
+      />
     </div>
     <!-- ESTADO -->
 
     <!-- CPF -->
     <div class="form-group col-md-4 mb-3">
       <label for="cpf">CPF </label>
-      <input type="number" class="form-control" id="cpf" required />
+      <input
+        type="text"
+        class="form-control"
+        id="cpf"
+        formControlName="cpf"
+        required
+      />
     </div>
     <!-- CPF -->
 
-    <button (click)="saveUser()" type="submit" class="btn btn-primary">
-      Enviar
-    </button>
+    <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>

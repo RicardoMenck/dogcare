@@ -11,6 +11,7 @@ export class MenuComponent {
   constructor(private tokenSecurity: TokenjwtService, private router: Router) {}
 
   logout() {
+    alert('Você está realizando o logout! Até mais!');
     this.tokenSecurity.deleteToken();
     this.router.navigateByUrl('/home');
   }

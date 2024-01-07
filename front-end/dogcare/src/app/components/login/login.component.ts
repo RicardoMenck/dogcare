@@ -3,7 +3,7 @@ import { LoginService } from './login.service';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { take } from 'rxjs';
-import { LoginModel } from '../../models/login.model';
+import { LoginModel } from './login.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,18 +30,20 @@ export class LoginComponent {
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'You must enter a value';
+      return 'Entre com um valor de email!';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? 'Este email não é válido' : '';
   }
 
   getErrorMessagePassword() {
     if (this.password.hasError('required')) {
-      return 'You must enter a value';
+      return 'Entre com um valor de senha!';
     }
 
-    return this.password.hasError('minLength') ? 'Ao menos 6 caracteris' : '';
+    return this.password.hasError('minLength')
+      ? 'Sua senha precisa ter ao minimo 6 caracteres'
+      : '';
   }
 
   realizarLogin() {
@@ -67,8 +69,9 @@ export class LoginComponent {
         .subscribe({
           next: (result: LoginModel) => {
             console.log(result.token);
+            console.log(result.name);
             this.tokenjwt.keepToken(result.token);
-            this.router.navigateByUrl('/menu');
+            this.router.navigateByUrl('/dog');
           },
           error: (error) => {
             console.log('Mensagem de erro!', error);

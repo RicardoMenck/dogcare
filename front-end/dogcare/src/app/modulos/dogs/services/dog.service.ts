@@ -6,8 +6,8 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { DogModel } from '../../models/dog.model';
+import { environment } from '../../../../environments/environment';
+import { DogModel } from '../models/dog.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,8 @@ export class DogService {
   //Headers
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'applicatiom/json',
-      Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
     }),
   };
 
