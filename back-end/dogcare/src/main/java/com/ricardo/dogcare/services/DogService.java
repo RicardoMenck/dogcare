@@ -1,10 +1,14 @@
 package com.ricardo.dogcare.services;
 
 import com.ricardo.dogcare.entities.Dog;
+import com.ricardo.dogcare.entities.User;
+import com.ricardo.dogcare.entities.enums.UserRole;
 import com.ricardo.dogcare.repositories.DogRepository;
+import com.ricardo.dogcare.repositories.UserRepository;
 import com.ricardo.dogcare.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +16,10 @@ import java.util.Optional;
 
 @Service
 public class DogService {
+
+
+
+
 
     @Autowired
     DogRepository dogRepository;
@@ -22,7 +30,17 @@ public class DogService {
         return  dogO.get();
     }
 
-    public List<Dog> listDogs(){ return dogRepository.findAll();}
+    public List<Dog> listDogs() {
+        //verifica se o usuario possui a role de ADM
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedUser.getRole() == UserRole.ADMIN) {
+            return dogRepository.findAll();
+        } else {
+            //return dogRepository.findAll();
+            return dogRepository.findByOwner(loggedUser);
+        }
+    }
+
 
 
     //POST

@@ -1,7 +1,7 @@
-<div class="class">
+<div class="card">
   <div class="card-header">
     <div class="float-left">
-      <h4>Cachorros!</h4>
+      <h2>Cachorros</h2>
     </div>
     <div class="float-right">
       <button type="button" class="btn btn-success" routerLink="new">
@@ -10,11 +10,19 @@
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover">
+    <table
+      class="table table-hover"
+      *ngIf="dogs$ | async as dogs; else loading"
+    >
       <thead>
         <tr>
           <th>#</th>
-          <th>Cachorros</th>
+          <th>Nome</th>
+          <th>Raça</th>
+          <th>Cor</th>
+          <th>Sexo</th>
+          <th>Castrado</th>
+          <th>peso(KG)</th>
         </tr>
       </thead>
       <tbody>
@@ -32,11 +40,15 @@
               <button class="btn btn-outline-warning b1 btn-sm">
                 Atualizar
               </button>
-              <button class="btn btn-outline-danger b1 btn-sm">Remover</button>
+              <button class="btn btn-outline-danger b1 btn-sm m-1">
+                Remover
+              </button>
             </span>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <ng-template #loading> <span>Carregando ...</span></ng-template>
   </div>
 </div>

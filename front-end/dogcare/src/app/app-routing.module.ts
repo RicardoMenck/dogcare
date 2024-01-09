@@ -11,6 +11,8 @@ import { ServicosComponent } from './components/servicos/servicos.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { autorizadoGuard } from './_guard/autorizado.guard';
 import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.component';
+import { DogServicesComponent } from './modulos/dog-services/dog-services/dog-services.component';
+import { UserComponent } from './modulos/users/user/user.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,10 +22,46 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
 
-  { path: 'dog', component: DogComponent, canActivate: [autorizadoGuard] },
   {
     path: 'dogs',
     component: DogDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
+  { path: 'dogs/new', component: DogComponent, canActivate: [autorizadoGuard] },
+  {
+    path: 'dogs/:id',
+    component: DogDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'dogs/:id/edit',
+    component: DogDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
+  { path: 'users', component: UserComponent, canActivate: [autorizadoGuard] },
+  {
+    path: 'users/:id',
+    component: UserComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'users/:id/edit',
+    component: UserComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'services',
+    component: DogServicesComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'services/:id',
+    component: DogServicesComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'services/:id/edit',
+    component: DogServicesComponent,
     canActivate: [autorizadoGuard],
   },
 
@@ -35,7 +73,7 @@ const routes: Routes = [
       import('./restrito/restrito.module').then((mod) => mod.RestritoModule),
   },
   {
-    path: 'dog',
+    path: 'dogs',
     loadChildren: () =>
       import('./modulos/dogs/dogs.module').then((mod) => mod.DogsModule),
   },

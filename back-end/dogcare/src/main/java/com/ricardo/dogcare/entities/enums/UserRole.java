@@ -1,8 +1,9 @@
 package com.ricardo.dogcare.entities.enums;
 
 public enum UserRole {
-    ADMIN("ADMIN"),
-    USER("USER");
+    USER("USER"),
+    ADMIN("ADMIN");
+
 
     private String role;
 

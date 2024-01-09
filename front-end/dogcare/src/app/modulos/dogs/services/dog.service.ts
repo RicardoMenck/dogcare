@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, delay, tap, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { DogModel } from '../models/dog.model';
@@ -17,56 +17,34 @@ export class DogService {
 
   constructor(private httpClient: HttpClient) {}
   //Headers
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
-    }),
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: 'Bearer ' + sessionStorage.getItem('jwt'),
+  //   }),
+  // };
 
+  //120
   listDog(): Observable<DogModel[]> {
     return this.httpClient
       .get<DogModel[]>(this.connect)
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(delay(2000), tap(console.log));
   }
 
   findByID(id: number): Observable<DogModel> {
-    return this.httpClient
-      .get<DogModel>(`${this.connect}/${id}`)
-      .pipe(retry(2), catchError(this.handleError));
+    return this.httpClient.get<DogModel>(`${this.connect}/${id}`);
   }
 
   saveDog(dog: DogModel): Observable<DogModel> {
-    return this.httpClient
-      .post<DogModel>(this.connect, dog, this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError));
+    return this.httpClient.post<DogModel>(this.connect, dog);
+    // .post<DogModel>(this.connect, dog, this.httpOptions)
   }
 
   updateDog(dog: DogModel): Observable<DogModel> {
-    return this.httpClient
-      .put<DogModel>(`${this.connect}/${dog.idDog}`, dog)
-      .pipe(retry(1), catchError(this.handleError));
+    return this.httpClient.put<DogModel>(`${this.connect}/${dog.idDog}`, dog);
   }
 
   deleteDog(id: number): Observable<DogModel> {
-    return this.httpClient
-      .delete<DogModel>(`${this.connect}/${id}`)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
-  //Manipulando erros
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      //Erro ocorreu do lado do client
-      errorMessage = error.error.message;
-    }
-    // Erro ocorreu no lado do servidor
-    else {
-      errorMessage =
-        `Códgo do erro: ${error.status}, ` + `mensagem: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+    return this.httpClient.delete<DogModel>(`${this.connect}/${id}`);
   }
 }

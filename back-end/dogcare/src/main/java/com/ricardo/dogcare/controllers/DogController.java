@@ -26,11 +26,15 @@ public class DogController {
         return ResponseEntity.ok().body(list);
     }
 
+    //filtro
+
     @GetMapping(value = "/{idDog}")
     public ResponseEntity<Dog> findById(@PathVariable(value = "idDog") Long idDog) {
         var DogO = dogService.findDogById(idDog);
         return ResponseEntity.ok().body(DogO);
     }
+
+    //Filtro
 
     //POST
     @PostMapping

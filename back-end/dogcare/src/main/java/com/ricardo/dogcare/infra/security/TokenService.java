@@ -26,7 +26,7 @@ public class TokenService {
                     .withIssuer(ISSUER)
                     .withSubject(user.getEmail())
                     .withClaim("name", user.getUserName())
-                    .withClaim("admin", UserRole.ADMIN.ordinal())
+                    .withClaim("admin", user.getRole().ordinal())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;

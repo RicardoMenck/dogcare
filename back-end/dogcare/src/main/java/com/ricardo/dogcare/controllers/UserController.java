@@ -43,7 +43,7 @@ public class UserController {
     }
 
     //PUT
-    //Verificar possível erro *2ºuser
+
     @PutMapping(value = "/{idUser}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "idUser") Long idUser, @RequestBody User user) {
         user = userService.updateUser(idUser, user);

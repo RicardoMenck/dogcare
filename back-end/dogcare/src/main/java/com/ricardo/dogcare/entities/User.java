@@ -42,6 +42,7 @@ public class User implements Serializable, UserDetails {
     @OneToMany(mappedBy = "owner")
     private List<Dog> dogs = new ArrayList<>();
 
+    //get
     public List<Dog> getDogs() {return dogs;}
 
 
@@ -50,7 +51,7 @@ public class User implements Serializable, UserDetails {
     //Se o usuário possuir a permissão de administrador, ele possui os acessos ao admin e user, caso contrário apenas do user.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADIMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 

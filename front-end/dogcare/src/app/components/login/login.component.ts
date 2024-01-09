@@ -68,10 +68,9 @@ export class LoginComponent {
         .pipe(take(1))
         .subscribe({
           next: (result: LoginModel) => {
-            console.log(result.token);
             console.log(result.name);
             this.tokenjwt.keepToken(result.token);
-            this.router.navigateByUrl('/dog');
+            this.router.navigateByUrl('/dogs');
           },
           error: (error) => {
             console.log('Mensagem de erro!', error);
