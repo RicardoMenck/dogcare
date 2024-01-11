@@ -34,8 +34,8 @@ const routes: Routes = [
     canActivate: [autorizadoGuard],
   },
   {
-    path: 'dogs/:id/edit',
-    component: DogDetailsComponent,
+    path: 'dogs/edit/:idDog',
+    component: DogComponent,
     canActivate: [autorizadoGuard],
   },
   { path: 'users', component: UserComponent, canActivate: [autorizadoGuard] },

@@ -6,7 +6,11 @@
 
 <div class="container p-5">
   <!-- <form (ngSubmit)="" [formGroup]=""> -->
-  <form (ngSubmit)="saveDog()" [formGroup]="dogFormCreate">
+  <form
+    class="needs validation"
+    (ngSubmit)="saveDog()"
+    [formGroup]="dogFormCreate"
+  >
     <!-- dogName -->
     <div class="form-group mb-3">
       <label class="form-label" for="dogName">Nome do Cachorro </label>
@@ -17,11 +21,26 @@
         formControlName="dogName"
         aria-describedby="dogName"
         placeholder="Digite o nome do seu Cachorro"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('dogName') }"
       />
-      @if (dogFormCreate.get('dogName')?.invalid){
-      <span>erro</span>
+      <div
+        class="m-1"
+        *ngIf="hasError('dogName') && hasError('dogName')?.['required']"
+        style="color: red"
+      >
+        Por favor informe um nome de cachorro!
+      </div>
+      <div
+        class="m-1"
+        *ngIf="hasError('dogName') && hasError('dogName')?.['maxlength']"
+        style="color: red"
+      >
+        Máximo de 250 caracteres!
+      </div>
+      <!-- @if (dogFormCreate.get('dogName')?.invalid){
+      <span>erro</span> } -->
       <!-- validar os erros -->
-      }
     </div>
     <!-- dogName -->
 
@@ -36,7 +55,22 @@
         aria-describedby="breed"
         placeholder="Digite a raça do seu Cachorro"
         required
+        [ngClass]="{ 'is-invalid': submitted && hasError('breed') }"
       />
+      <div
+        class="m-1"
+        *ngIf="hasError('breed') && hasError('breed')?.['required']"
+        style="color: red"
+      >
+        Por favor informe a raça do cachorro!
+      </div>
+      <div
+        class="m-1"
+        *ngIf="hasError('breed') && hasError('breed')?.['maxlength']"
+        style="color: red"
+      >
+        Máximo de 250 caracteres!
+      </div>
     </div>
     <!-- breed -->
 
@@ -50,14 +84,36 @@
         formControlName="color"
         aria-describedby="color"
         placeholder="Digite a(s) cor(es) do seu Cachorro"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('color') }"
       />
+      <div
+        class="m-1"
+        *ngIf="hasError('color') && hasError('color')?.['required']"
+        style="color: red"
+      >
+        Por favor informe a cor do cachorro!
+      </div>
+      <div
+        class="m-1"
+        *ngIf="hasError('color') && hasError('color')?.['maxlength']"
+        style="color: red"
+      >
+        Máximo de 250 caracteres!
+      </div>
     </div>
     <!-- color -->
 
     <!-- sexo  Verificar-->
     <div class="form-group mb-3">
       <label for="sexo">Qual o sexo do Cachorro?</label>
-      <select class="form-select" id="sexo" formControlName="sexo">
+      <select
+        class="form-select"
+        id="sexo"
+        formControlName="sexo"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('sexo') }"
+      >
         <option value="MACHO">MACHO</option>
         <option value="FÊMEA">FÊMEA</option>
       </select>
@@ -72,6 +128,7 @@
         id="neutered"
         formControlName="neutered"
         required
+        [ngClass]="{ 'is-invalid': submitted && hasError('neutered') }"
       >
         <option [value]="true">Sim</option>
         <option [value]="false">Não</option>
@@ -89,10 +146,15 @@
         formControlName="peso"
         aria-describedby="peso"
         placeholder="Digite o peso do seu Cachorro"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('peso') }"
       />
     </div>
     <!-- peso -->
 
     <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-secondary m-1" (click)="onCancel()">
+      Cancelar
+    </button>
   </form>
 </div>

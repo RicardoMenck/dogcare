@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable, delay, tap, throwError } from 'rxjs';
+import { Observable, delay, take, tap, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { DogModel } from '../models/dog.model';
@@ -28,7 +28,11 @@ export class DogService {
   listDog(): Observable<DogModel[]> {
     return this.httpClient
       .get<DogModel[]>(this.connect)
-      .pipe(delay(2000), tap(console.log));
+      .pipe(delay(1000), tap(console.log));
+  }
+
+  loadById(idDog: number) {
+    return this.httpClient.get(`${this.connect}/${idDog}`).pipe(take(1));
   }
 
   findByID(id: number): Observable<DogModel> {
@@ -36,7 +40,7 @@ export class DogService {
   }
 
   saveDog(dog: DogModel): Observable<DogModel> {
-    return this.httpClient.post<DogModel>(this.connect, dog);
+    return this.httpClient.post<DogModel>(this.connect, dog).pipe(take(1));
     // .post<DogModel>(this.connect, dog, this.httpOptions)
   }
 

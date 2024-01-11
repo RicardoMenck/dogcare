@@ -22,13 +22,13 @@ public class TestConfig implements CommandLineRunner {
 
 
 
-    @Override
-    public void run(String... args) throws Exception {
-
-        User u1 = new User("Gabriel Neto", "gabineto@gmail.com", "958542365", "123456", "86000-000", "Rua das martinhas","250",null,"Centro","Londrina","PR", "55555555555", UserRole.USER );
-        User u2 = new User("Felipe Kenne", "kenne@gmail.com", "95123145", "456852", "22000-000", "Rua São Paulo","120","bloco B","São Miguel","São Paulo","SP", "11111111111", UserRole.USER );
-
-        userRepository.saveAll(Arrays.asList(u1, u2));
+   @Override
+  public void run(String... args) throws Exception {
+//
+//        User u1 = new User("Gabriel Neto", "gabineto@gmail.com", "958542365", "123456", "86000-000", "Rua das martinhas","250",null,"Centro","Londrina","PR", "55555555555", UserRole.USER );
+//        User u2 = new User("Felipe Kenne", "kenne@gmail.com", "95123145", "456852", "22000-000", "Rua São Paulo","120","bloco B","São Miguel","São Paulo","SP", "11111111111", UserRole.USER );
+//
+//        userRepository.saveAll(Arrays.asList(u1, u2));
 
 
         Services s1 = new Services("Banho para Pets", "Proporcione uma experiência relaxante para o seu animal de estimação com nosso banho especial. Inclui shampoo de alta qualidade, condicionamento, secagem e escovação.", 90.00);

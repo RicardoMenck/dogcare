@@ -7,6 +7,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AlertModalService } from '../../../shared/alert-modal.service';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dog',
@@ -19,39 +23,63 @@ export class DogComponent implements OnInit {
   dogs: DogModel[] = [];
 
   dogFormCreate!: FormGroup;
+  submitted = false;
 
   constructor(
     private dogService: DogService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modal: AlertModalService,
+    private location: Location,
+    private route: ActivatedRoute
   ) {
     //primeira parte campos do formulario.
     this.dogFormCreate = this.formBuilder.group({
       //dogName: new FormControl(null,[Validators.required]))
-      id: [null],
-      dogName: [null, [Validators.required]], //com validators
-      breed: [null], //sem validators
-      color: ['preto'], //por padrão esse valor
-      sexo: [null],
-      neutered: [null],
-      peso: [null],
+      idDog: [null],
+      dogName: [null, [Validators.required, Validators.maxLength(250)]], //com validators
+      breed: [null, [Validators.required, Validators.maxLength(250)]], //sem validators
+      color: [null, [Validators.required, Validators.maxLength(250)]], //por padrão esse valor
+      sexo: [null, [Validators.required]],
+      neutered: [null, [Validators.required]],
+      peso: [null, [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    // this.route.params.subscribe((params: any) => {
+    //   const id = params['idDog'];
+    //   console.log(id);
+    //   const dog$ = this.dogService.loadById(id);
+    //   dog$.subscribe((dog) => {
+    //     this.updateDogForm(dog);
+    //   });
+    // });
+    this.route.params
+      .pipe(
+        map(
+          (params: any) => params['idDog'],
+          switchMap((idDog) => this.dogService.loadById(idDog))
+        )
+      )
+      .subscribe((dog) => this.updateDogForm(dog));
+
     this.dogService.listDog();
   }
 
-  // addDog() {
-  //   this.dog.dogName = 'Rex';
-  //   this.dog.breed = 'Caramelo';
-  //   this.dog.color = 'Caramelo';
-  //   this.dog.sexo = 'FÊMEA';
-  //   this.dog.neutered = true;
-  //   this.dog.peso = 25.5;
-  //   this.dogService.saveDog(this.dog);
-  // }
+  updateDogForm(dog: DogModel) {
+    this.dogFormCreate.patchValue({
+      idDog: dog.idDog,
+      dogName: dog.dogName,
+      breed: dog.breed,
+      color: dog.color,
+      sexo: dog.sexo,
+      neutered: dog.neutered,
+      peso: dog.peso,
+    });
+  }
 
   saveDog() {
+    this.submitted = true;
     for (const key in this.dogFormCreate.controls) {
       if (this.dogFormCreate.controls.hasOwnProperty(key)) {
         this.dogFormCreate.controls[key].markAsDirty();
@@ -61,13 +89,33 @@ export class DogComponent implements OnInit {
     if (this.dogFormCreate.valid) {
       const formValues: DogModel = this.dogFormCreate.getRawValue();
       if (formValues.idDog) {
-        this.dogService.updateDog(formValues).subscribe(() => {
-          this.cleanForm();
-        });
+        this.dogService.updateDog(formValues).subscribe(
+          (success) =>
+            this.modal.showAlertSuccess(
+              'Cachorro atualizado com sucesso! 🐾🐶'
+            ),
+          (error) =>
+            this.modal.showAlertDanger(
+              'Erro ao cadastrar o cachorro, tente novamente ou contacte a equipe de suporte!'
+            ),
+          () => {
+            this.cleanForm();
+          }
+        );
       } else {
-        this.dogService.saveDog(formValues).subscribe(() => {
-          this.cleanForm();
-        });
+        this.dogService.saveDog(formValues).subscribe(
+          (success) => {
+            this.modal.showAlertSuccess('Cachorro registrado com sucesso!');
+            this.location.back();
+          },
+          (error) =>
+            this.modal.showAlertDanger(
+              'Erro ao cadastrar o cachorro, tente novamente ou contacte a equipe de suporte!'
+            ),
+          () => {
+            this.cleanForm();
+          }
+        );
       }
     }
   }
@@ -88,5 +136,15 @@ export class DogComponent implements OnInit {
     this.listDog();
     this.dogFormCreate.reset();
     this.dog = {} as DogModel;
+  }
+
+  onCancel() {
+    this.submitted = false;
+    this.dogFormCreate.reset();
+    //console.log('cancelado');
+  }
+
+  hasError(field: string) {
+    return this.dogFormCreate.get(field)?.errors;
   }
 }

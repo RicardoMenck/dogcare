@@ -7,12 +7,15 @@
       <button type="button" class="btn btn-success" routerLink="new">
         Cadastrar Cachorro
       </button>
+      <button type="button" class="btn btn-secondary m-1" (click)="onRefresh()">
+        Atualizar
+      </button>
     </div>
   </div>
   <div class="card-body">
     <table
       class="table table-hover"
-      *ngIf="dogs$ | async as dogs; else loading"
+      *ngIf="dogs$ | async as dogs; else loadingError"
     >
       <thead>
         <tr>
@@ -37,7 +40,10 @@
           <td></td>
           <td>
             <span class="float-right">
-              <button class="btn btn-outline-warning b1 btn-sm">
+              <button
+                class="btn btn-outline-warning b1 btn-sm"
+                (click)="onEdit(dog)"
+              >
                 Atualizar
               </button>
               <button class="btn btn-outline-danger b1 btn-sm m-1">
@@ -49,6 +55,11 @@
       </tbody>
     </table>
 
-    <ng-template #loading> <span>Carregando ...</span></ng-template>
+    <ng-template #loadingError>
+      <div *ngIf="error$ | async; else loading">
+        Erro ao carregar a lista de cachorros. Tente novamente mais tarde.
+      </div>
+      <ng-template #loading><span>Carregando ...</span></ng-template>
+    </ng-template>
   </div>
 </div>

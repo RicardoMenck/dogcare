@@ -30,6 +30,14 @@ public class Dog implements Serializable {
     @JoinColumn(name = "owner_id") //Nome para a chave estrangeira
     private User owner;
 
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
     @OneToMany(mappedBy = "pet")
     private List<Services> services =new ArrayList<>();
 
@@ -106,6 +114,10 @@ public class Dog implements Serializable {
     public void setPeso(double peso) {
         this.peso = peso;
     }
+
+
+
+
 
     //HASH AND EQUAL
     @Override

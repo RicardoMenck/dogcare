@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { DogComponent } from './modulos/dogs/dog/dog.component';
 import { UserComponent } from './modulos/users/user/user.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { UserComponent } from './modulos/users/user/user.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    SharedModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
