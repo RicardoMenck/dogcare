@@ -1,10 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DogService } from '../services/dog.service';
 import { DogModel } from '../models/dog.model';
 import { Observable, Subject, catchError, empty } from 'rxjs';
 import { AlertModalService } from '../../../shared/alert-modal.service';
+import { DogsModule } from '../dogs.module';
 
 @Component({
   selector: 'app-dog-details',
@@ -14,13 +15,18 @@ import { AlertModalService } from '../../../shared/alert-modal.service';
 export class DogDetailsComponent implements OnInit {
   //dogs: DogModel[] = [];
 
+  deleteModalRef: BsModalRef;
+  @ViewChild('deleteModal') deleteModal;
+
   dogs$: Observable<DogModel[]> | undefined;
   error$ = new Subject<boolean>();
   //bsModalRef: BsModalRef | undefined;
 
+  dogSelect: DogModel;
+
   constructor(
     private dogService: DogService,
-    //private modalService: BsModalService
+    private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -63,7 +69,33 @@ export class DogDetailsComponent implements OnInit {
     //   'Erro ao carregar a lista de cachorros. Tente novamente mais tarde.';
   }
 
-  onEdit(dog: DogModel) {
+  onEdit(idDog: any) {
     this.router.navigate(['edit', idDog], { relativeTo: this.route });
+  }
+
+  onDelete(dog) {
+    this.dogSelect = dog;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {
+      class: 'modal-sm',
+    });
+  }
+
+  onConfirmDelete() {
+    this.dogService.deleteDog(this.dogSelect.idDog).subscribe(
+      (success) => {
+        this.onRefresh();
+        this.deleteModalRef.hide();
+      },
+      (error) => {
+        this.alertService.showAlertDanger(
+          'Erro ao remover cachorros. Tente novamente mais tarde.'
+        );
+        this.deleteModalRef.hide();
+      }
+    );
+  }
+
+  onDeclineDelete() {
+    this.deleteModalRef.hide();
   }
 }

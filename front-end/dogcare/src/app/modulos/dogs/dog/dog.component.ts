@@ -46,14 +46,14 @@ export class DogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params: any) => {
-    //   const id = params['idDog'];
-    //   console.log(id);
-    //   const dog$ = this.dogService.loadById(id);
-    //   dog$.subscribe((dog) => {
-    //     this.updateDogForm(dog);
-    //   });
-    // });
+    this.route.params.subscribe((params: any) => {
+      const id = params['idDog'];
+      console.log(id);
+      const dog$ = this.dogService.loadById(id);
+      dog$.subscribe((dog) => {
+        this.updateDogForm(dog);
+      });
+    });
     this.route.params
       .pipe(
         map(
@@ -66,7 +66,7 @@ export class DogComponent implements OnInit {
     this.dogService.listDog();
   }
 
-  updateDogForm(dog: DogModel) {
+  updateDogForm(dog) {
     this.dogFormCreate.patchValue({
       idDog: dog.idDog,
       dogName: dog.dogName,
@@ -90,10 +90,12 @@ export class DogComponent implements OnInit {
       const formValues: DogModel = this.dogFormCreate.getRawValue();
       if (formValues.idDog) {
         this.dogService.updateDog(formValues).subscribe(
-          (success) =>
+          (success) => {
             this.modal.showAlertSuccess(
               'Cachorro atualizado com sucesso! 🐾🐶'
             ),
+              this.location.back();
+          },
           (error) =>
             this.modal.showAlertDanger(
               'Erro ao cadastrar o cachorro, tente novamente ou contacte a equipe de suporte!'

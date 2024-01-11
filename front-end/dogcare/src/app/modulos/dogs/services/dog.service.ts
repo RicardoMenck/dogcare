@@ -31,7 +31,7 @@ export class DogService {
       .pipe(delay(1000), tap(console.log));
   }
 
-  loadById(idDog: number) {
+  loadById(idDog) {
     return this.httpClient.get(`${this.connect}/${idDog}`).pipe(take(1));
   }
 
@@ -45,10 +45,14 @@ export class DogService {
   }
 
   updateDog(dog: DogModel): Observable<DogModel> {
-    return this.httpClient.put<DogModel>(`${this.connect}/${dog.idDog}`, dog);
+    return this.httpClient
+      .put<DogModel>(`${this.connect}/${dog.idDog}`, dog)
+      .pipe(take(1));
   }
 
   deleteDog(id: number): Observable<DogModel> {
-    return this.httpClient.delete<DogModel>(`${this.connect}/${id}`);
+    return this.httpClient
+      .delete<DogModel>(`${this.connect}/${id}`)
+      .pipe(take(1));
   }
 }
