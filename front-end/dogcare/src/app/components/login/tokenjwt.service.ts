@@ -1,4 +1,4 @@
-import { UserModel } from '../../modulos/users/user/user.model';
+import { UserModel } from '../../modulos/users/models/user.model';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

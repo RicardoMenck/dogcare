@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 
-import { RestritoModule } from './restrito/restrito.module';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { DogComponent } from './modulos/dogs/dog/dog.component';
@@ -45,7 +44,7 @@ const routes: Routes = [
     canActivate: [autorizadoGuard],
   },
   {
-    path: 'users/:id/edit',
+    path: 'users/edit/:idUser',
     component: UserComponent,
     canActivate: [autorizadoGuard],
   },
@@ -67,11 +66,6 @@ const routes: Routes = [
 
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' },
-  {
-    path: 'restrito',
-    loadChildren: () =>
-      import('./restrito/restrito.module').then((mod) => mod.RestritoModule),
-  },
   {
     path: 'dogs',
     loadChildren: () =>

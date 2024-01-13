@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserModel } from '../../modulos/users/user/user.model';
+import { UserModel } from '../../modulos/users/models/user.model';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 

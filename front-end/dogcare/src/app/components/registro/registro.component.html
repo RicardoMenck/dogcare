@@ -6,13 +6,14 @@
 
 <div class="container p-5">
   <!-- <form (ngSubmit)="" [formGroup]=""> -->
-  <form (ngSubmit)="registerUser()" [formGroup]="userFormRegister">
+  <form #f="ngForm" (ngSubmit)="registerUser()" [formGroup]="userFormRegister">
     <!-- NOME -->
     <div class="form-group mb-3">
       <label class="form-label" for="userName">Digite seu nome</label>
       <input
         type="text"
         class="form-control"
+        name="userName"
         id="userName"
         formControlName="userName"
         aria-describedby="userName"
@@ -22,150 +23,167 @@
     <!-- NOME -->
 
     <!-- EMAIL -->
-    <div class="form-group mb-3">
-      <label for="email">Endereço de email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-        aria-describedby="email"
-        placeholder="Seu email"
-      />
-    </div>
-    <!-- EMAIL -->
+    <div class="row">
+      <div class="form-group col-md-6 mb-3">
+        <label for="email">Endereço de email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+          formControlName="email"
+          aria-describedby="email"
+          placeholder="Seu email"
+        />
+      </div>
+      <!-- EMAIL -->
 
+      <!-- TELEFONE -->
+      <div class="form-group col-md-6 mb-3">
+        <label for="phone">Telefone</label>
+        <input
+          type="tel"
+          class="form-control"
+          name="phone"
+          id="phone"
+          formControlName="phone"
+          aria-describedby="phone"
+          placeholder="Seu telefone"
+        />
+      </div>
+    </div>
     <!-- TELEFONE -->
-    <div class="form-group mb-3">
-      <label for="phone">Telefone</label>
-      <input
-        type="tel"
-        class="form-control"
-        id="phone"
-        formControlName="phone"
-        aria-describedby="phone"
-        placeholder="Seu telefone"
-      />
-    </div>
-
-    <!-- TELEFONE -->
-
-    <!-- SENHA -->
-
-    <div class="form-group mb-3">
-      <label for="password">Senha</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        formControlName="password"
-        placeholder="Senha"
-      />
-    </div>
-    <!-- SENHA -->
 
     <!-- CEP -->
-    <div class="form-group mb-3">
-      <label for="zipCode">CEP</label>
-      <input
-        type="text"
-        class="form-control"
-        id="zipCode"
-        formControlName="zipCode"
-      />
-    </div>
-    <!-- CEP -->
+    <div class="row">
+      <div class="form-group col-md-2 mb-3">
+        <label for="zipCode">CEP</label>
+        <input
+          type="text"
+          class="form-control"
+          name="zipCode"
+          id="zipCode"
+          formControlName="zipCode"
+          (blur)="consultaCEP($event.target.value, f)"
+        />
+      </div>
+      <!-- CEP -->
 
-    <!-- ENDEREÇO -->
-    <div class="form-group mb-3">
-      <label for="address">Endereço</label>
-      <input
-        type="text"
-        class="form-control"
-        id="address"
-        formControlName="address"
-        placeholder="Rua das palmeiras"
-      />
-    </div>
-    <!-- ENDEREÇO -->
+      <!-- ENDEREÇO -->
+      <div class="form-group col-md-6 mb-3">
+        <label for="address">Endereço</label>
+        <input
+          type="text"
+          class="form-control"
+          name="address"
+          id="address"
+          formControlName="address"
+          placeholder="Rua das palmeiras"
+        />
+      </div>
+      <!-- ENDEREÇO -->
 
-    <!-- NÚMERO -->
-    <div class="form-group mb-3">
-      <label for="streetNumber">Número</label>
-      <input
-        type="text"
-        class="form-control"
-        id="streetNumber"
-        formControlName="streetNumber"
-        placeholder="55"
-      />
-    </div>
-    <!-- NÚMERO -->
+      <!-- NÚMERO -->
+      <div class="form-group col-md-1 mb-3">
+        <label for="streetNumber">Número</label>
+        <input
+          type="text"
+          class="form-control"
+          name="streetNumber"
+          id="streetNumber"
+          formControlName="streetNumber"
+        />
+      </div>
 
-    <!-- COMPLEMENTO -->
-    <div class="form-group mb-3">
-      <label class="form-label" for="complement">Complemento</label>
-      <input
-        type="text"
-        class="form-control"
-        id="complement"
-        formControlName="complement"
-        aria-describedby="complement"
-        placeholder="Bloco, apto, andar"
-      />
+      <!-- NÚMERO -->
+
+      <!-- COMPLEMENTO -->
+      <div class="form-group col-md-3 mb-3">
+        <label for="complement">Complemento</label>
+        <input
+          type="text"
+          class="form-control"
+          name="complement"
+          id="complement"
+          formControlName="complement"
+          placeholder="Bloco,Andar, Apto."
+        />
+      </div>
     </div>
     <!-- COMPLEMENTO -->
 
     <!-- BAIRRO -->
-    <div class="form-group mb-3">
-      <label class="form-label" for="neighborhood">Bairro</label>
-      <input
-        type="text"
-        class="form-control"
-        id="neighborhood"
-        formControlName="neighborhood"
-        aria-describedby="neighborhood"
-      />
-    </div>
-    <!-- BAIRRO -->
+    <div class="row">
+      <div class="form-group col-md-6 mb-3">
+        <label for="neighborhood">Bairro</label>
+        <input
+          type="text"
+          class="form-control"
+          name="neighborhood"
+          id="neighborhood"
+          formControlName="neighborhood"
+          aria-describedby="neighborhood"
+        />
+      </div>
+      <!-- BAIRRO -->
 
-    <!-- CIDADE -->
+      <!-- CIDADE -->
 
-    <div class="form-group col-md-6 mb-3">
-      <label for="city">Cidade</label>
-      <input
-        type="text"
-        class="form-control"
-        id="city"
-        formControlName="city"
-      />
-    </div>
-    <!-- CIDADE -->
+      <div class="form-group col-md-3 mb-3">
+        <label for="city">Cidade</label>
+        <input
+          type="text"
+          class="form-control"
+          name="city"
+          id="city"
+          formControlName="city"
+        />
+      </div>
+      <!-- CIDADE -->
 
-    <!-- ESTADO -->
-    <div class="form-group col-md-4 mb-3">
-      <label for="state">Estado</label>
-      <input
-        type="text"
-        class="form-control"
-        id="state"
-        formControlName="state"
-      />
+      <!-- ESTADO -->
+      <div class="form-group col-md-3 mb-3">
+        <label for="state">Estado</label>
+        <input
+          type="text"
+          class="form-control"
+          name="state"
+          id="state"
+          formControlName="state"
+        />
+      </div>
     </div>
     <!-- ESTADO -->
 
     <!-- CPF -->
-    <div class="form-group col-md-4 mb-3">
-      <label for="cpf">CPF </label>
-      <input
-        type="text"
-        class="form-control"
-        id="cpf"
-        formControlName="cpf"
-        required
-      />
+    <div class="row">
+      <div class="form-group col-md-6 mb-3">
+        <label for="cpf">CPF </label>
+        <input
+          type="text"
+          class="form-control"
+          id="cpf"
+          formControlName="cpf"
+          required
+        />
+      </div>
+      <!-- CPF -->
+
+      <!-- SENHA -->
+
+      <div class="form-group col-md-6 mb-3">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          formControlName="password"
+          placeholder="Senha"
+        />
+      </div>
     </div>
-    <!-- CPF -->
+    <!-- SENHA -->
 
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
