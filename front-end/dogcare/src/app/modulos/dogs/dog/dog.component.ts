@@ -98,7 +98,7 @@ export class DogComponent implements OnInit {
           },
           (error) =>
             this.modal.showAlertDanger(
-              'Erro ao cadastrar o cachorro, tente novamente ou contacte a equipe de suporte!'
+              'Erro ao atualizar o cachorro, tente novamente ou contacte a equipe de suporte!'
             ),
           () => {
             this.cleanForm();
