@@ -11,6 +11,7 @@ import { autorizadoGuard } from './_guard/autorizado.guard';
 import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.component';
 import { DogServicesComponent } from './modulos/dog-services/dog-services/dog-services.component';
 import { UserComponent } from './modulos/users/user/user.component';
+import { UserDetailsComponent } from './modulos/users/user-details/user-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -35,10 +36,14 @@ const routes: Routes = [
     component: DogComponent,
     canActivate: [autorizadoGuard],
   },
-  { path: 'users', component: UserComponent, canActivate: [autorizadoGuard] },
+  {
+    path: 'users',
+    component: UserDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
   {
     path: 'users/:id',
-    component: UserComponent,
+    component: UserDetailsComponent,
     canActivate: [autorizadoGuard],
   },
   {
@@ -68,6 +73,11 @@ const routes: Routes = [
     path: 'dogs',
     loadChildren: () =>
       import('./modulos/dogs/dogs.module').then((mod) => mod.DogsModule),
+  },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./modulos/users/users.module').then((mod) => mod.UsersModule),
   },
 ];
 
