@@ -14,7 +14,6 @@ import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { PhotosComponent } from './components/photos/photos.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { DogComponent } from './modulos/dogs/dog/dog.component';
@@ -27,7 +26,6 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     HomeComponent,
     AboutComponent,
-    PhotosComponent,
     UserComponent,
     DogComponent,
     ServicosComponent,
