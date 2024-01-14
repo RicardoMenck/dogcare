@@ -47,7 +47,7 @@ export class UserDetailsComponent implements OnInit {
     );
   }
 
-  onEdit(idUser: any) {
+  onEdit(idUser) {
     this.router.navigate(['edit', idUser], { relativeTo: this.route });
   }
 

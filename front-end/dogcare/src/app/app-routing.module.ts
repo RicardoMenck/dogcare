@@ -12,6 +12,7 @@ import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.comp
 import { DogServicesComponent } from './modulos/dog-services/dog-services/dog-services.component';
 import { UserComponent } from './modulos/users/user/user.component';
 import { UserDetailsComponent } from './modulos/users/user-details/user-details.component';
+import { UserUpdateComponent } from './modulos/users/user-update/user-update.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -47,8 +48,13 @@ const routes: Routes = [
     canActivate: [autorizadoGuard],
   },
   {
+    path: 'users/edit',
+    component: UserUpdateComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
     path: 'users/edit/:idUser',
-    component: UserComponent,
+    component: UserUpdateComponent,
     canActivate: [autorizadoGuard],
   },
   {
@@ -62,7 +68,7 @@ const routes: Routes = [
     canActivate: [autorizadoGuard],
   },
   {
-    path: 'services/:id/edit',
+    path: 'services/edit/:id',
     component: DogServicesComponent,
     canActivate: [autorizadoGuard],
   },
