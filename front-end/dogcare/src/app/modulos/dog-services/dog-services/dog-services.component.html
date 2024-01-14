@@ -1,1 +1,76 @@
-<p>dog-services works!</p>
+<div class="card border-secondary">
+  <div class="card-header">
+    <h2 class="text-center text-success">Cadastro de Serviço</h2>
+  </div>
+</div>
+
+<div class="container p-5">
+  <form
+    class="needs validation"
+    (ngSubmit)="saveService()"
+    [formGroup]="dogServiceFormCreate"
+  >
+    <!-- name -->
+    <div class="form-group mb-3">
+      <label class="form-label" for="name">Nome do Serviço </label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        aria-describedby="name"
+        placeholder="Digite o Serviço"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('name') }"
+      />
+      <div
+        class="m-1"
+        *ngIf="hasError('name') && hasError('name')?.['required']"
+        style="color: red"
+      >
+        Por favor informe um nome de Serviço!
+      </div>
+      <div
+        class="m-1"
+        *ngIf="hasError('name') && hasError('name')?.['maxlength']"
+        style="color: red"
+      >
+        Máximo de 250 caracteres!
+      </div>
+    </div>
+    <!-- name -->
+
+    <!-- description -->
+    <div class="form-group mb-3">
+      <label class="form-label" for="description">Descrição</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        formControlName="description"
+        aria-describedby="description"
+        placeholder="Digite a descriçao do Serviço"
+        required
+        [ngClass]="{ 'is-invalid': submitted && hasError('description') }"
+      />
+      <div
+        class="m-1"
+        *ngIf="hasError('description') && hasError('description')?.['required']"
+        style="color: red"
+      >
+        Por favor informe a descrição do Serviço!
+      </div>
+      <div
+        class="m-1"
+        *ngIf="hasError('breed') && hasError('breed')?.['maxlength']"
+        style="color: red"
+      >
+        Máximo de 250 caracteres!
+      </div>
+    </div>
+    <!-- description -->
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button class="btn btn-secondary m-1" (click)="onCancel()">Cancelar</button>
+  </form>
+</div>

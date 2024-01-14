@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, delay, take, tap, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { DogModel } from '../models/dog.model';
 

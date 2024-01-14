@@ -12,6 +12,7 @@ import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.comp
 import { DogServicesComponent } from './modulos/dog-services/dog-services/dog-services.component';
 import { UserDetailsComponent } from './modulos/users/user-details/user-details.component';
 import { UserUpdateComponent } from './modulos/users/user-update/user-update.component';
+import { DogServicesDetailsComponent } from './modulos/dog-services/dog-services-details/dog-services-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -43,16 +44,16 @@ const routes: Routes = [
   },
   {
     path: 'services',
+    component: DogServicesDetailsComponent,
+    canActivate: [autorizadoGuard],
+  },
+  {
+    path: 'services/new',
     component: DogServicesComponent,
     canActivate: [autorizadoGuard],
   },
   {
-    path: 'services/:id',
-    component: DogServicesComponent,
-    canActivate: [autorizadoGuard],
-  },
-  {
-    path: 'services/edit/:id',
+    path: 'services/edit/:idService',
     component: DogServicesComponent,
     canActivate: [autorizadoGuard],
   },
@@ -68,6 +69,13 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () =>
       import('./modulos/users/users.module').then((mod) => mod.UsersModule),
+  },
+  {
+    path: 'services',
+    loadChildren: () =>
+      import('./modulos/dog-services/dog-services.module').then(
+        (mod) => mod.DogServicesModule
+      ),
   },
 ];
 

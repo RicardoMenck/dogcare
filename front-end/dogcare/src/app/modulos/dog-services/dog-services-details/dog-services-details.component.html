@@ -1,55 +1,46 @@
 <div class="card">
   <div class="card-header">
     <div class="float-left">
-      <h2>Usuários</h2>
+      <h2>Serviços</h2>
     </div>
     <div class="float-right">
+      <button type="button" class="btn btn-success" routerLink="new">
+        Cadatros de Serviços
+      </button>
       <button type="button" class="btn btn-secondary m-1" (click)="onRefresh()">
-        Atualizar Lista
+        Atualizar
       </button>
     </div>
   </div>
   <div class="card-body">
     <table
       class="table table-hover"
-      *ngIf="users$ | async as users; else loadingError"
+      *ngIf="services$ | async as services; else loadingError"
     >
       <thead>
         <tr>
           <th>#</th>
           <th>Nome</th>
-          <th>Telefone</th>
-          <th>CEP</th>
-          <th>Endereço</th>
-          <th>Complemento</th>
-          <th>Bairro</th>
-          <th>Cidade</th>
-          <th>Estado</th>
+          <th>Descrição</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.idUser }}</td>
-          <td>{{ user.userName }}</td>
-          <td>{{ user.phone }}</td>
-          <td>{{ user.zipCode }}</td>
-          <td>{{ user.address }}</td>
-          <td>{{ user.complement }}</td>
-          <td>{{ user.neighborhood }}</td>
-          <td>{{ user.city }}</td>
-          <td>{{ user.state }}</td>
+        <tr *ngFor="let service of services">
+          <td>{{ service.idService }}</td>
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
           <td></td>
           <td>
             <span class="float-right">
               <button
                 class="btn btn-outline-warning b1 btn-sm"
-                (click)="onEdit(user.idUser)"
+                (click)="onEdit(service.idService)"
               >
                 Atualizar
               </button>
               <button
                 class="btn btn-outline-danger b1 btn-sm m-1"
-                (click)="onDelete(user)"
+                (click)="onDelete(service)"
               >
                 Remover
               </button>
@@ -61,7 +52,7 @@
 
     <ng-template #loadingError>
       <div *ngIf="error$ | async; else loading">
-        Erro ao carregar a lista de usuários. Tente novamente mais tarde.
+        Erro ao carregar a lista de Serviços. Tente novamente mais tarde.
       </div>
       <ng-template #loading><span>Carregando ...</span></ng-template>
     </ng-template>
@@ -70,7 +61,7 @@
 
 <ng-template #deleteModal>
   <div class="modal-body text-center">
-    <p>Certeza que deseja remover esse usuário?</p>
+    <p>Certeza que deseja remover esse serviço?</p>
     <button type="button" class="btn btn-default" (click)="onConfirmDelete()">
       Sim
     </button>
