@@ -17,7 +17,6 @@ import { MenuComponent } from './components/menu/menu.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ServicosComponent } from './components/servicos/servicos.component';
 import { DogComponent } from './modulos/dogs/dog/dog.component';
-import { UserComponent } from './modulos/users/user/user.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     HomeComponent,
     AboutComponent,
-    UserComponent,
     DogComponent,
     ServicosComponent,
     MenuComponent,

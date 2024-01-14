@@ -143,6 +143,7 @@ export class DogComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.dogFormCreate.reset();
+    this.location.back();
     //console.log('cancelado');
   }
 

@@ -10,7 +10,6 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { autorizadoGuard } from './_guard/autorizado.guard';
 import { DogDetailsComponent } from './modulos/dogs/dog-details/dog-details.component';
 import { DogServicesComponent } from './modulos/dog-services/dog-services/dog-services.component';
-import { UserComponent } from './modulos/users/user/user.component';
 import { UserDetailsComponent } from './modulos/users/user-details/user-details.component';
 import { UserUpdateComponent } from './modulos/users/user-update/user-update.component';
 
@@ -28,11 +27,6 @@ const routes: Routes = [
   },
   { path: 'dogs/new', component: DogComponent, canActivate: [autorizadoGuard] },
   {
-    path: 'dogs/:id',
-    component: DogDetailsComponent,
-    canActivate: [autorizadoGuard],
-  },
-  {
     path: 'dogs/edit/:idDog',
     component: DogComponent,
     canActivate: [autorizadoGuard],
@@ -40,16 +34,6 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserDetailsComponent,
-    canActivate: [autorizadoGuard],
-  },
-  {
-    path: 'users/:id',
-    component: UserDetailsComponent,
-    canActivate: [autorizadoGuard],
-  },
-  {
-    path: 'users/edit',
-    component: UserUpdateComponent,
     canActivate: [autorizadoGuard],
   },
   {
