@@ -15,7 +15,6 @@ public class Services implements Serializable {
     private Long idService;
     private String name;
     private String description;
-    private Double price;
 
 
     @ManyToOne
@@ -26,10 +25,10 @@ public class Services implements Serializable {
 
     //ASSOCIATIONS
     //CONSTRUCTORS
-    public Services(String name, String description, Double price) {
+    public Services(String name, String description) {
         this.name = name;
         this.description = description;
-        this.price = price;
+
     }
 
     public Services() {
@@ -59,14 +58,6 @@ public class Services implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     //HASH AND EQUALS

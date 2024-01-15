@@ -1,0 +1,167 @@
+20:45:42.215 HV000001: Hibernate Validator 8.0.1.Final
+20:45:42.275 Starting DogcareApplication using Java 17.0.6 with PID 3188 (D:\dog-hero3\dogcare\back-end\dogcare\target\classes started by ricar in D:\dog-hero3\dogcare\back-end\dogcare)
+20:45:42.276 No active profile set, falling back to 1 default profile: "default"
+20:45:42.331 Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+20:45:42.332 For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+20:45:43.376 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:45:43.452 Finished Spring Data repository scanning in 66 ms. Found 3 JPA repository interfaces.
+20:45:44.235 Tomcat initialized with port 8080 (http)
+20:45:44.247 Initializing ProtocolHandler ["http-nio-8080"]
+20:45:44.250 Starting service [Tomcat]
+20:45:44.250 Starting Servlet engine: [Apache Tomcat/10.1.17]
+20:45:44.318 Initializing Spring embedded WebApplicationContext
+20:45:44.320 Root WebApplicationContext: initialization completed in 1987 ms
+20:45:44.469 HHH000204: Processing PersistenceUnitInfo [name: default]
+20:45:44.545 HHH000412: Hibernate ORM core version 6.4.1.Final
+20:45:44.585 HHH000026: Second-level cache disabled
+20:45:44.849 No LoadTimeWeaver setup: ignoring JPA class transformer
+20:45:44.893 HikariPool-1 - Starting...
+20:45:45.245 HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30bb2fb0
+20:45:45.248 HikariPool-1 - Start completed.
+20:45:46.425 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:45:46.507 Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:45:47.340 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:45:47.661 Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2f5e66c7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32525a8f, org.springframework.security.web.context.SecurityContextHolderFilter@34aa6897, org.springframework.security.web.header.HeaderWriterFilter@39976400, org.springframework.web.filter.CorsFilter@3bf7e59f, org.springframework.security.web.authentication.logout.LogoutFilter@1c133384, com.ricardo.dogcare.infra.security.SecurityFilter@659fcd58, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6958e59c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e93f2b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4e9b058c, org.springframework.security.web.session.SessionManagementFilter@7473c6b5, org.springframework.security.web.access.ExceptionTranslationFilter@54b9db81, org.springframework.security.web.access.intercept.AuthorizationFilter@3695708b]
+20:45:47.975 LiveReload server is running on port 35729
+20:45:47.991 Starting ProtocolHandler ["http-nio-8080"]
+20:45:48.012 Tomcat started on port 8080 (http) with context path ''
+20:45:48.025 Started DogcareApplication in 6.126 seconds (process running for 6.856)
+20:46:21.442 Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:46:21.443 Initializing Servlet 'dispatcherServlet'
+20:46:21.444 Completed initialization in 1 ms
+20:46:21.510 Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on 2024-01-14T22:13:12Z.
+	at com.auth0.jwt.JWTVerifier$BaseVerification.assertValidInstantClaim(JWTVerifier.java:346)
+	at com.auth0.jwt.JWTVerifier$BaseVerification.lambda$addMandatoryClaimChecks$17(JWTVerifier.java:308)
+	at com.auth0.jwt.JWTVerifier$BaseVerification$1.verify(JWTVerifier.java:405)
+	at com.auth0.jwt.JWTVerifier.verifyClaims(JWTVerifier.java:482)
+	at com.auth0.jwt.JWTVerifier.verify(JWTVerifier.java:464)
+	at com.auth0.jwt.JWTVerifier.verify(JWTVerifier.java:445)
+	at com.ricardo.dogcare.infra.security.TokenService.validateToken(TokenService.java:44)
+	at com.ricardo.dogcare.infra.security.SecurityFilter.doFilterInternal(SecurityFilter.java:30)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+20:47:01.694   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:47:11.518   Usuário: admin@dogcare.com  deletou o cachorro com id: 3
+20:47:11.576   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:55:45.789 Closing JPA EntityManagerFactory for persistence unit 'default'
+20:55:45.792 HikariPool-1 - Shutdown initiated...
+20:55:45.800 HikariPool-1 - Shutdown completed.
+20:56:04.089 HV000001: Hibernate Validator 8.0.1.Final
+20:56:04.150 Starting DogcareApplication using Java 17.0.6 with PID 1272 (D:\dog-hero3\dogcare\back-end\dogcare\target\classes started by ricar in D:\dog-hero3\dogcare\back-end\dogcare)
+20:56:04.151 No active profile set, falling back to 1 default profile: "default"
+20:56:04.205 Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+20:56:04.206 For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+20:56:05.239 Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:56:05.315 Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
+20:56:06.104 Tomcat initialized with port 8080 (http)
+20:56:06.116 Initializing ProtocolHandler ["http-nio-8080"]
+20:56:06.119 Starting service [Tomcat]
+20:56:06.120 Starting Servlet engine: [Apache Tomcat/10.1.17]
+20:56:06.186 Initializing Spring embedded WebApplicationContext
+20:56:06.188 Root WebApplicationContext: initialization completed in 1980 ms
+20:56:06.345 HHH000204: Processing PersistenceUnitInfo [name: default]
+20:56:06.420 HHH000412: Hibernate ORM core version 6.4.1.Final
+20:56:06.465 HHH000026: Second-level cache disabled
+20:56:06.716 No LoadTimeWeaver setup: ignoring JPA class transformer
+20:56:06.761 HikariPool-1 - Starting...
+20:56:07.119 HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c9bb1c8
+20:56:07.122 HikariPool-1 - Start completed.
+20:56:08.273 HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:56:08.348 Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:56:09.181 spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:56:09.508 Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7ad34630, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5234e4ee, org.springframework.security.web.context.SecurityContextHolderFilter@40726503, org.springframework.security.web.header.HeaderWriterFilter@1ef84737, org.springframework.web.filter.CorsFilter@fc788a1, org.springframework.security.web.authentication.logout.LogoutFilter@259b2b9c, com.ricardo.dogcare.infra.security.SecurityFilter@4c533ebd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1ebe13c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@588624f7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e579415, org.springframework.security.web.session.SessionManagementFilter@6d4ffe2a, org.springframework.security.web.access.ExceptionTranslationFilter@71832052, org.springframework.security.web.access.intercept.AuthorizationFilter@4a5c4276]
+20:56:09.839 LiveReload server is running on port 35729
+20:56:09.859 Starting ProtocolHandler ["http-nio-8080"]
+20:56:09.884 Tomcat started on port 8080 (http) with context path ''
+20:56:09.897 Started DogcareApplication in 6.157 seconds (process running for 6.888)
+20:56:47.661 Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:56:47.661 Initializing Servlet 'dispatcherServlet'
+20:56:47.663 Completed initialization in 2 ms
+20:56:47.952   Usuário: admin@dogcare.com  está realizando login! 
+20:56:48.024   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:56:52.625   Usuário: admin@dogcare.com  listou os usuários
+20:56:57.930   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:57:00.108 Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"]
+20:57:14.148   Usuário: admin@dogcare.com  criou o cachorro: null
+20:57:14.215   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:57:14.245   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:57:17.815   Usuário: admin@dogcare.com  verificou o cachorro com id: 4
+20:57:25.515   Usuário: admin@dogcare.com  atualizou o cachorro: 4 -> MeuDog
+20:57:25.557   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:57:25.584   Usuário: admin@dogcare.com  verificou a lista de cachorros
+20:57:27.355   Usuário: admin@dogcare.com  verificou a lista de serviços
+20:57:30.210 Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"]
+20:57:41.455   Usuário: admin@dogcare.com  criou o serviço: null
+20:57:41.481   Usuário: admin@dogcare.com  verificou a lista de serviços
+20:57:41.506   Usuário: admin@dogcare.com  verificou a lista de serviços
+20:58:04.989   Usuário: Ricardo Augusto  foi registrado: email: menckker3@gmail.com id: 4
+20:58:13.394   Usuário: menckker3@gmail.com  está realizando login! 
+20:58:13.427   Usuário: menckker3@gmail.com  verificou a lista de cachorros
+20:58:16.614   Usuário: menckker3@gmail.com  verificou a lista de serviços
+20:58:19.939   Usuário: menckker3@gmail.com  verificou a lista de cachorros
+20:58:20.683 Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"]
+20:58:28.508   Usuário: menckker3@gmail.com  criou o cachorro: null
+20:58:28.533   Usuário: menckker3@gmail.com  verificou a lista de cachorros
+20:58:28.557   Usuário: menckker3@gmail.com  verificou a lista de cachorros
+20:59:28.609 Closing JPA EntityManagerFactory for persistence unit 'default'
+20:59:28.613 HikariPool-1 - Shutdown initiated...
+20:59:28.620 HikariPool-1 - Shutdown completed.

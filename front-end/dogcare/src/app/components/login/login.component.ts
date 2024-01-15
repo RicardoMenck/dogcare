@@ -16,7 +16,7 @@ export class LoginComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
     Validators.required,
-    Validators.minLength(6),
+    Validators.minLength(3),
   ]);
   hide = true;
 
@@ -42,7 +42,7 @@ export class LoginComponent {
     }
 
     return this.password.hasError('minLength')
-      ? 'Sua senha precisa ter ao minimo 6 caracteres'
+      ? 'Sua senha precisa ter ao minimo 3 caracteres'
       : '';
   }
 

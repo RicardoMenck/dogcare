@@ -1,6 +1,7 @@
 package com.ricardo.dogcare.services;
 
 import com.ricardo.dogcare.entities.User;
+import com.ricardo.dogcare.entities.enums.UserRole;
 import com.ricardo.dogcare.repositories.UserRepository;
 import com.ricardo.dogcare.services.exceptions.DatabaseException;
 import com.ricardo.dogcare.services.exceptions.ResourceNotFoundException;
@@ -32,21 +33,30 @@ public class UserService {
 
     //GET
     public User findById(Long idUser) {
-        logger.info("Finding one person by id! Id searched: " + idUser);
-        logger.info("Usuário: " + getLogado() + "est[a verificando o usuário: " + idUser);
+        logger.info("  Finding one person by id! Id searched: " + idUser);
+        logger.info("  Usuário: " + getLogado() + "  verificou o usuário: " + idUser);
         Optional<User> userO = userRepository.findById(idUser);
         return  userO.orElseThrow(() -> new ResourceNotFoundException(idUser));
     }
 
-    public List<User> listUsers(){ return userRepository.findAll();}
-
+    public List<User> listUsers() {
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedUser.getRole() == UserRole.ADMIN) {
+            logger.info("  Usuário: " + getLogado() + "  listou os usuários");
+            return userRepository.findAll();
+        }
+        return null;
+    }
 
     //POST
-    public User saveUser(User user) {return userRepository.save(user);}
+    public User saveUser(User user) {
+        logger.info("  Usuário: " + getLogado() + "  criou o usuário: " + user.getIdUser());
+        return userRepository.save(user);}
 
 
     //PUT
     public User updateUser(Long idUser, User user) {
+        logger.info("  Usuário: " + getLogado() + "  atualizou o usuário: "+ idUser + " -> " + user.getUserName());
         try {
         User entity = userRepository.getReferenceById(idUser);
         updateData(entity, user);
@@ -72,6 +82,7 @@ public class UserService {
 
     //DELETE
     public void deleteUser(Long idUser) {
+        logger.info("  Usuário: " + getLogado() + "  deletou o usuario com id: "+ idUser);
         try {
             userRepository.deleteById(idUser);
         } catch (EmptyResultDataAccessException e) {
